@@ -1,0 +1,7 @@
+version: "2"
+services:
+  postgres:
+    container_name: poke_postgres
+    image: postgres
+    ports:
+      - 5432:5432
