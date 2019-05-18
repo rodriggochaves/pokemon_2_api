@@ -1,12 +1,9 @@
 module Poke
   module Kind
     def Kind.initialize
-      kinds = [
-        { description: 'grass', color: '#FF0000' },
-        { description: 'poison', color: '#FF0000' },
-      ]
-
-      kinds.map { |k| ::Kind.create!(k) }
+      Poke::Api.kinds.each do |k|
+        k.save!
+      end
     end
   end
 end

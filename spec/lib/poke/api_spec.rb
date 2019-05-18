@@ -1,9 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Poke::Api do
-  before do
+  before(:each) do
     @real_endpoint = ENV['POKEMON_API']
     ENV['POKEMON_API'] = 'https://pokeapi.co/api/v2'
+    response = File.read('spec/lib/poke/mocks/kind.json')
+    stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
     Poke::Kind.initialize
   end
 
@@ -45,5 +47,17 @@ RSpec.describe Poke::Api do
 
     base_species = described_class.query_evolves_from_species('ivysaur')
     expect(base_species).to eq('bulbasaur')
+  end
+
+  describe '#kinds returns all kinds' do
+    before(:each) do
+      response = File.read('spec/lib/poke/mocks/kind.json')
+      stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
+    end
+
+    subject { described_class.kinds }
+
+    it { expect(subject.count).to eq(20) }
+    it { expect(subject.map(&:class).inject(true) { |acc, klass| acc && klass == Kind }).to eq(true) }
   end
 end

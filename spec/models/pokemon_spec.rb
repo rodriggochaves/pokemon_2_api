@@ -1,11 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Pokemon, type: :model do
-  before { Poke::Kind.initialize }
+  before do
+    response = File.read('spec/lib/poke/mocks/kind.json')
+    stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
+    Poke::Kind.initialize
+  end
 
   it "can has two types" do
     pokemon = Pokemon.spawn(name: 'bulbasaur', kind: ['grass', 'poison'])
-    expect(pokemon.kind.map(&:description)).to eq(['grass', 'poison'])
+    expect(pokemon.kind.map(&:description)).to match_array(['grass', 'poison'])
   end
 
   it '#evolve_from returns a pokemon 1 step behind in evolution tree' do

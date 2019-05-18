@@ -39,5 +39,11 @@ module Poke
       end
     end
 
+    def Api.kinds
+      response = RestClient.get("#{ENV['POKEMON_API']}/type")
+      parsed_response = JSON.parse(response.body)
+
+      parsed_response['results'].map { |k| ::Kind.new(description: k['name']) }
+    end
   end
 end
