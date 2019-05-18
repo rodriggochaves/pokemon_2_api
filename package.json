@@ -1,10 +1,32 @@
 {
   "name": "pokemon_2_api",
   "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ],
+    "setupFilesAfterEnv": ["./spec/javascript/setupTests.js"]
+  },
   "dependencies": {
-    "@rails/webpacker": "^4.0.2"
+    "@babel/preset-react": "^7.0.0",
+    "@rails/webpacker": "^4.0.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.0",
+    "jest": "^24.8.0",
     "webpack-dev-server": "^3.4.1"
   }
 }
