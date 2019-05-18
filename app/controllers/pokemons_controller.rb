@@ -1,3 +1,8 @@
 class PokemonsController < ApplicationController
-  def index; end
+  def home; end
+
+  def index
+    @pokemons = Pokemon.all
+    render json: @pokemons
+  end
 end
