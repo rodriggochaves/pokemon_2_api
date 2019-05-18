@@ -31,7 +31,15 @@ RSpec.describe Poke::Api do
     expect(pokemon_names.count).to eq(151)
   end
 
-  it '#query_evolves_from_species returns a ordered list of evolutions' do
+  it '#query_evolves_from_species returns nil if dont exists' do
+    response = File.read('spec/lib/poke/mocks/pokemon_species_1.json')
+    stub_request(:get, "https://pokeapi.co/api/v2/pokemon-species/bulbasaur").to_return(body: response)
+
+    base_species = described_class.query_evolves_from_species('bulbasaur')
+    expect(base_species).to eq(nil)
+  end
+
+  it '#query_evolves_from_species returns the name of the base pokemon' do
     response = File.read('spec/lib/poke/mocks/pokemon_species_2.json')
     stub_request(:get, "https://pokeapi.co/api/v2/pokemon-species/ivysaur").to_return(body: response)
 

@@ -34,7 +34,10 @@ module Poke
     def Api.query_evolves_from_species(name)
       response = RestClient.get("#{ENV['POKEMON_API']}/pokemon-species/#{name}")
       parsed_response = JSON.parse(response.body)
-      parsed_response['evolves_from_species']['name']
+      if parsed_response['evolves_from_species']
+        parsed_response['evolves_from_species']['name']
+      end
     end
+
   end
 end
