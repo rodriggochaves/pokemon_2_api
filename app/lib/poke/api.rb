@@ -20,7 +20,10 @@ module Poke
     end
 
     def Api.extract_kind(response)
-      response['types'].map { |t| t['type']['name'] }.join('/')
+      response['types'].map do |t|
+        description = t['type']['name']
+        ::Kind[description]
+      end
     end
 
     def Api.extract_poke_index(response)

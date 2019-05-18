@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Poke::Api do
-  before(:all) do
+  before do
     @real_endpoint = ENV['POKEMON_API']
     ENV['POKEMON_API'] = 'https://pokeapi.co/api/v2'
+    Poke::Kind.initialize
   end
 
   after do
