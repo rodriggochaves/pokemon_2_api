@@ -30,5 +30,11 @@ module Poke
       response["game_indices"]
         .find{ |index| index["version"]["name"] == 'firered' }['game_index']
     end
+
+    def Api.query_evolves_from_species(name)
+      response = RestClient.get("#{ENV['POKEMON_API']}/pokemon-species/#{name}")
+      parsed_response = JSON.parse(response.body)
+      parsed_response['evolves_from_species']['name']
+    end
   end
 end

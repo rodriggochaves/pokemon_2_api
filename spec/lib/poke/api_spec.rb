@@ -30,4 +30,12 @@ RSpec.describe Poke::Api do
     pokemon_names = described_class.query_kanto_pokedex
     expect(pokemon_names.count).to eq(151)
   end
+
+  it '#query_evolves_from_species returns a ordered list of evolutions' do
+    response = File.read('spec/lib/poke/mocks/pokemon_species_2.json')
+    stub_request(:get, "https://pokeapi.co/api/v2/pokemon-species/ivysaur").to_return(body: response)
+
+    base_species = described_class.query_evolves_from_species('ivysaur')
+    expect(base_species).to eq('bulbasaur')
+  end
 end
