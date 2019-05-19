@@ -12,7 +12,9 @@
       "node_modules",
       "app/javascript"
     ],
-    "setupFilesAfterEnv": ["./spec/javascript/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "./spec/javascript/setupTests.js"
+    ]
   },
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
@@ -20,7 +22,10 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "babel-jest": "^24.8.0",
