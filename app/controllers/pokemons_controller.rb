@@ -12,6 +12,12 @@ class PokemonsController < ApplicationController
     render json: pokemon, status: 200
   end
 
+  def update
+    pokemon = Pokemon.find(params[:id])
+    pokemon.update(pokemon_params)
+    render json: pokemon, status: 200
+  end
+
   private def pokemon_params
     {
       kind: Poke::Kind.parse(params[:kind])
