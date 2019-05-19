@@ -5,5 +5,10 @@ module Poke
         k.save!
       end
     end
+
+    def Kind.parse(kind_string)
+      parsed_string = kind_string.split('/')
+      ::Kind.where(description: parsed_string)
+    end
   end
 end
