@@ -13,6 +13,13 @@ export const listPokemons = (pokemons) => (
   }
 )
 
+export const filterPokemons = (query) => (
+  {
+    type: 'FILTER_POKEMONS',
+    query
+  }
+)
+
 export const fetchPokemons = () => {
   return (dispatch) => {
     dispatch(showLoading());

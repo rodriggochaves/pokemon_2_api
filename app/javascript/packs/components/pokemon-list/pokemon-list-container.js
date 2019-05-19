@@ -4,7 +4,8 @@ import PokemonList from './pokemon-list';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    pokemonsList: state.pokemons,
+    pokemons: state.pokemons,
+    query: state.filterPokemons,
   }
 }
 

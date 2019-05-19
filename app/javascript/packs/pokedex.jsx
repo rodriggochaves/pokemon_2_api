@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 import PokemonListContainer from './components/pokemon-list/pokemon-list-container';
+import PokemonFilterContainer from './components/pokemon-filter/pokemon-filter-container';
 
 class Pokedex extends Component {
   constructor() {
@@ -35,6 +36,7 @@ class Pokedex extends Component {
         <div className="ui container">
           <br />
           <h1>Pokedex</h1>
+          <PokemonFilterContainer />
           <PokemonListContainer />
         </div>
       )
