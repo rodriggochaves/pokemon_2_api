@@ -5,11 +5,11 @@ import Pokedex from 'packs/pokedex';
 
 describe("Pokedex Component", () => {
   it("can be rendered", () => {
-    expect(<Pokedex />).toBeDefined();
+    expect(<Pokedex fetchPokemons={jest.fn()} />).toBeDefined();
   });
 
   it("it has a title", () => {
-    const wrapper = shallow(<Pokedex />);
-    expect(wrapper.text()).toEqual("Hello Pokemons");
+    const wrapper = shallow(<Pokedex  fetchPokemons={jest.fn()} />);
+    expect(wrapper.text()).toEqual("Pokedex");
   })
 });

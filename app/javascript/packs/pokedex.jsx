@@ -6,9 +6,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
-import PokemonList from './components/pokemons-list';
-
-import styles from './styles/pokedex';
+import PokemonListContainer from './components/pokemon-list/pokemon-list-container';
 
 class Pokedex extends Component {
   constructor() {
@@ -24,10 +22,9 @@ class Pokedex extends Component {
   }
 
   render() {
-    console.log(this.props);
     if (this.props.isLoading) {
       return (
-       <div className={styles.loading}>
+       <div className="loading">
          <div className="ui active dimmer">
            <div className="ui loader"></div>
          </div>
@@ -38,7 +35,7 @@ class Pokedex extends Component {
         <div className="ui container">
           <br />
           <h1>Pokedex</h1>
-          <PokemonList pokemonsList={this.props.pokemonsList} />
+          <PokemonListContainer />
         </div>
       )
     }
