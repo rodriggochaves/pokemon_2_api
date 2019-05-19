@@ -23,6 +23,9 @@ RSpec.describe Poke::Api do
 
     it { expect(pokemon.name).to eq("bulbasaur") }
     it { expect(pokemon.poke_index).to eq(1) }
+    it do
+      expect(pokemon.image_url).to eq("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
+    end
   end
 
   it "#query_kanto_pokedex returns all 151 names" do

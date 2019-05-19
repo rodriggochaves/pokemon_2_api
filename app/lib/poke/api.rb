@@ -14,7 +14,8 @@ module Poke
       pokemon_data = {
         name: parsed_response['name'],
         kind: extract_kind(parsed_response),
-        poke_index: extract_poke_index(parsed_response)
+        poke_index: extract_poke_index(parsed_response),
+        image_url: parsed_response['sprites']['front_default']
       }
       Pokemon.new(pokemon_data)
     end
