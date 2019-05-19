@@ -10,12 +10,28 @@ RSpec.describe "PokemonsController", type: :request do
 
   describe "#index returns HTTP 200 " do
     before do
-      ['bulbasaur', 'ivysaur', 'venasaur'].each { |name| Pokemon.create!(name: name) }
+      # improve this with factories
+      [['bulbasaur', 1], ['ivysaur', 2], ['venasaur', 3]].each do |poke|
+        Pokemon.create!(name: poke[0], kind: [Kind['grass'], Kind['poison']], poke_index: poke[1],
+                        image_url: "http://image.com")
+      end
       get '/api'
     end
 
     it { expect(response).to have_http_status(200) }
     it { expect(JSON.parse(response.body).count).to eq(3) }
+    it "follows interface" do
+      parsed = JSON.parse(response.body)
+      bulbasaur = Pokemon.find_by(name: 'bulbasaur')
+      expect(parsed[0]).to eq({
+        id: bulbasaur.id,
+        name: 'bulbasaur',
+        kind: 'grass/poison',
+        poke_index: 1,
+        evolve_from_id: nil,
+        image_url: 'http://image.com'
+      }.stringify_keys)
+    end
   end
 
   describe 'POST /api/pokemons can create a new pokemon' do
