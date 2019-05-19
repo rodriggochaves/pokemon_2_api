@@ -17,14 +17,22 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
 
-import Pokedex from './pokedex';
+import PokedexContainer from './pokedex-container';
+import pokedexApp from './reducers'
 
 console.log('Hello World from Webpacker')
 
+const store = createStore(pokedexApp, applyMiddleware(thunk))
+
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Pokedex />,
+    <Provider store={store}>
+      <PokedexContainer />
+    </Provider>,
     document.body.appendChild(document.createElement('div')),
   )
 })
