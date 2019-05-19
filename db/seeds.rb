@@ -8,5 +8,5 @@ Poke::Api.query_kanto_pokedex.map do |pokemon|
     pokemon.evolve_from = base
   end
   puts "Creating #{pokemon.name}"
-  pokemon.save
+  pokemon.save!
 end
