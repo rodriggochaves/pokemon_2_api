@@ -24,13 +24,16 @@ describe("Pokedex Component", () => {
 
   describe("display pokemon information", () => {
     let pokemonInfo;
+    const spriteUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png";
 
     beforeEach(() => {
-      const initialState = { pokemons: [{id: 1, name: 'bulbasaur'}] }
+      const initialState = { pokemons: [ { id: 1, name: 'bulbasaur', image_url: spriteUrl, kind: "grass/poison" } ]}
       const component = renderPokemonListContainer(initialState);
       pokemonInfo = component.find('tr').at(1).find('td');
     })
 
-    it("shows name", () => expect(pokemonInfo.at(0).text()).toEqual('bulbasaur'));
+    it("shows image", () => expect(pokemonInfo.at(0).find('img').prop('src')).toEqual(spriteUrl));
+    it("shows name", () => expect(pokemonInfo.at(1).text()).toEqual('bulbasaur'));
+    it("shows kind", () => expect(pokemonInfo.at(2).text()).toEqual('grass/poison'));
   })
 });
