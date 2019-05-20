@@ -15,24 +15,14 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import PokedexContainer from './pokedex-container';
-import pokedexApp from './reducers'
-
-console.log('Hello World from Webpacker')
-
-const store = createStore(pokedexApp, applyMiddleware(thunk))
+import App from './app';
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Provider store={store}>
-      <PokedexContainer />
-    </Provider>,
+    <App />,
     document.body.appendChild(document.createElement('div')),
   )
 })
