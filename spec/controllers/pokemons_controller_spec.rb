@@ -79,4 +79,34 @@ RSpec.describe "PokemonsController", type: :request do
       expect(charizard.kind).to match_array([Kind['fire'], Kind['flying']])
     end
   end
+
+  describe 'GET /api/pokemon/:id' do
+    let(:bulbasaur) { create(:bulbasaur) }
+    let(:ivysaur) { create(:ivysaur) }
+    let(:venosaur) { create(:venosaur) }
+
+    before do
+      ivysaur.evolve_from = bulbasaur
+      venosaur.evolve_from = ivysaur
+    end
+
+    subject { get "/api/pokemons/#{bulbasaur.id}" }
+
+    it do 
+      subject
+      expect(response).to have_http_status(200)
+    end
+
+    it 'returns name' do 
+      subject
+      response_body = JSON.parse(response.body)
+      expect(response_body['name']).to eq('bulbasaur')
+    end
+
+    it 'returns kind' do 
+      subject
+      response_body = JSON.parse(response.body)
+      expect(response_body['kind']).to eq('grass/poison')
+    end
+  end
 end

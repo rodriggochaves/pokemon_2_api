@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   scope :api do
     get '/' => 'pokemons#index'
+    get '/pokemons/:id' => 'pokemons#show'
     post '/pokemons' => 'pokemons#create'
     patch '/pokemons/:id' => 'pokemons#update'
   end

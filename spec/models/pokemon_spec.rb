@@ -24,4 +24,10 @@ RSpec.describe Pokemon, type: :model do
 
     expect(bulbasaur.evolve_from).to eq(nil)
   end
+
+  it '#parsed_kind returns the kind as a string' do
+    bulbasaur = Pokemon.create(name: 'bulbasaur', kind: [Kind['grass'], Kind['poison']])
+
+    expect(bulbasaur.parsed_kind).to eq('grass/poison')
+  end
 end

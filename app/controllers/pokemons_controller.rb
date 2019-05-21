@@ -6,6 +6,11 @@ class PokemonsController < ApplicationController
     render "index.json"
   end
 
+  def show
+    @pokemon = Pokemon.find(params[:id])
+    render "show.json"
+  end
+
   def create
     pokemon = Pokemon.new(pokemon_params)
     pokemon.save!
