@@ -86,8 +86,8 @@ RSpec.describe "PokemonsController", type: :request do
     let(:venosaur) { create(:venosaur) }
 
     before do
-      ivysaur.evolve_from = bulbasaur
-      venosaur.evolve_from = ivysaur
+      ivysaur.update(evolve_from: bulbasaur)
+      venosaur.update(evolve_from: ivysaur)
     end
 
     subject { get "/api/pokemons/#{bulbasaur.id}" }
@@ -107,6 +107,12 @@ RSpec.describe "PokemonsController", type: :request do
       subject
       response_body = JSON.parse(response.body)
       expect(response_body['kind']).to eq('grass/poison')
+    end
+
+    it 'returns evolutions' do
+      subject
+      response_body = JSON.parse(response.body)
+      expect(response_body['evolutions'].map { |p| p['id'] }).to eq([ivysaur.id, venosaur.id])
     end
   end
 end
