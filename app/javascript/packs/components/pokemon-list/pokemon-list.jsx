@@ -30,7 +30,7 @@ export default props => {
                 <img src={pokemon.image_url} />
               </td>
               <td>
-                <Link to="/pokemon">{pokemon.name}</Link>
+                <Link to={{pathname: `/pokemon/${pokemon.id}`, query: {pokemonId: pokemon.id}}}  >{pokemon.name}</Link>
               </td>
               <td className="ui center aligned">{pokemon.kind}</td>
             </tr>

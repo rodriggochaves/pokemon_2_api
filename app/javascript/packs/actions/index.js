@@ -20,6 +20,29 @@ export const filterPokemons = (query) => (
   }
 )
 
+export const showPokemon = (pokemon) => (
+  {
+    type: 'SHOW_POKEMON',
+    pokemon,
+  }
+)
+
+export const fetchPokemon = pokemonId => {
+  return (dispatch) => {
+    dispatch(showLoading());
+
+    setTimeout(() => {
+      return  fetch(`/api/pokemons/${pokemonId}`)
+      .then(response => response.json())
+      .then(response => {
+        dispatch(showPokemon(response));
+        dispatch(hideLoading());
+      })
+    }, 1000)
+  }
+}
+
+// TODO: rename to fetchAllPokemons
 export const fetchPokemons = () => {
   return (dispatch) => {
     dispatch(showLoading());

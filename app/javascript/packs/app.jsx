@@ -5,7 +5,7 @@ import { createStore, applyMiddleware } from "redux"
 import { BrowserRouter, Route } from "react-router-dom"
 
 import PokedexContainer from "./pokedex-container"
-import PokemonPage from "./components/pokemon-page/pokemon-page"
+import PokemonPageContainer from "./components/pokemon-page/pokemon-page-container"
 import pokedexApp from "./reducers"
 
 const store = createStore(pokedexApp, applyMiddleware(thunk))
@@ -15,7 +15,7 @@ export default props => {
     <Provider store={store}>
       <BrowserRouter>
         <Route path="/" exact component={PokedexContainer} />
-        <Route path="/pokemon/" component={PokemonPage} />
+        <Route path="/pokemon/:id" component={PokemonPageContainer} />
       </BrowserRouter>
     </Provider>
   )

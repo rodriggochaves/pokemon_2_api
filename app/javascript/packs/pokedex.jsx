@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 import PokemonListContainer from './components/pokemon-list/pokemon-list-container';
 import PokemonFilterContainer from './components/pokemon-filter/pokemon-filter-container';
+import Loading from './components/loading/loading';
 
 class Pokedex extends Component {
   constructor() {
@@ -24,13 +25,7 @@ class Pokedex extends Component {
 
   render() {
     if (this.props.isLoading) {
-      return (
-       <div className="loading">
-         <div className="ui active dimmer">
-           <div className="ui loader"></div>
-         </div>
-       </div>
-      )
+      return <Loading />
     } else {
       return (
         <div className="ui container">
