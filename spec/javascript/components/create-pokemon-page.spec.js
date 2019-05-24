@@ -12,7 +12,7 @@ describe("CreatePokemonPage", () => {
 
   it("can change the name", () => {
     const component = shallow(<CreatePokemonPage />);
-    component.find("input[name='name']").simulate("change", { target: { value: "bulbasaur" } });
+    component.find("input[name='name']").simulate("change", { target: { value: "bulbasaur", name: "name" } });
     expect(component.state('name')).toEqual("bulbasaur");
   });
 

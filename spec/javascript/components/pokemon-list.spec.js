@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router';
 
 import PokemonList from 'packs/components/pokemon-list/pokemon-list';
 

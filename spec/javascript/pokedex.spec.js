@@ -9,7 +9,7 @@ describe("Pokedex Component", () => {
   });
 
   it("it has a title", () => {
-    const wrapper = shallow(<Pokedex  fetchPokemons={jest.fn()} />);
-    expect(wrapper.text()).toEqual("Pokedex");
+    const wrapper = shallow(<Pokedex fetchPokemons={jest.fn()} />);
+    expect(wrapper.find("h1").text()).toEqual("Pokedex");
   })
 });

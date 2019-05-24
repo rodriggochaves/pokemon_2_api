@@ -1,7 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
+
 
 import PokemonListContainer from 'packs/components/pokemon-list/pokemon-list-container';
 
@@ -11,7 +13,9 @@ describe("Pokedex Component", () => {
     const store = mockStore(initialState)
     return mount(
       <Provider store={store}>
-        <PokemonListContainer />
+        <MemoryRouter>
+          <PokemonListContainer />
+        </MemoryRouter>
       </Provider>
     )
   }
