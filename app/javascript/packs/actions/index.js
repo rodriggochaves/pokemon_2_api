@@ -27,6 +27,22 @@ export const listKinds = kinds => ({
   kinds
 });
 
+export const deletePokemon = pokemonId => ({
+  type: "DELETE_POKEMON",
+  pokemonId
+});
+
+export const destroyPokemon = pokemonId => dispatch => {
+  dispatch(showLoading());
+
+  return fetch(`/api/pokemons/${pokemonId}`, {
+    method: "DELETE"
+  }).then(() => {
+    dispatch(deletePokemon(pokemonId));
+    dispatch(hideLoading());
+  });
+};
+
 export const getKinds = () => dispatch => {
   dispatch(showLoading());
 

@@ -47,4 +47,20 @@ describe("Actions", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it("can destroy a pokemon", () => {
+    fetchMock.delete("/api/pokemons/1", {});
+
+    const expectedActions = [
+      { type: "SHOW_LOADING" },
+      { type: "DELETE_POKEMON", pokemonId: 1 },
+      { type: "HIDE_LOADING" }
+    ];
+
+    const store = mockStore({ kinds: [] });
+
+    return store.dispatch(actions.destroyPokemon(1)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });
