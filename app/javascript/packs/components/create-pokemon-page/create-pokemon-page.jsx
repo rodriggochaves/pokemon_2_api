@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router";
 
 export default class CreatePokemonPage extends Component {
   constructor() {
@@ -8,6 +9,7 @@ export default class CreatePokemonPage extends Component {
       type1: null,
       type2: null,
       evolveFrom: null,
+      redirect: false
     };
   }
 
@@ -36,14 +38,22 @@ export default class CreatePokemonPage extends Component {
     event.preventDefault();
     const kind = this.translateKind(this.state);
     const { name, evolveFrom } = this.state;
-    this.props.postPokemon({
-      name,
-      evolveFrom,
-      kind
-    });
+    this.props
+      .postPokemon({
+        name,
+        evolveFrom,
+        kind
+      })
+      .then(() => {
+        this.setState({ redirect: true });
+      });
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="ui container">
         <br />
