@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     get '/pokemons/:id' => 'pokemons#show'
     post '/pokemons' => 'pokemons#create'
     patch '/pokemons/:id' => 'pokemons#update'
+
+    get '/kinds' => 'kinds#index'
   end
 end
