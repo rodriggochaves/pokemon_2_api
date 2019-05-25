@@ -34,6 +34,6 @@ class PokemonsController < ApplicationController
   private def pokemon_params
     {
       kind: Poke::Kind.parse(params[:kind])
-    }.merge(params.permit(:name, :poke_index))
+    }.merge(params.permit(:name, :poke_index, :evolve_from_id))
   end
 end

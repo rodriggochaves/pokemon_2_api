@@ -34,11 +34,16 @@ RSpec.describe "PokemonsController", type: :request do
   end
 
   describe 'POST /api/pokemons can create a new pokemon' do
+    let(:charizard) do
+      Pokemon.create(name: "Charizard")
+    end
+
     subject do
       post '/api/pokemons', params: {
         name: 'Mega Charizard',
         kind: 'fire/flying',
         poke_index: 6,
+        evolve_from_id: charizard.id
       }
     end
 
@@ -48,7 +53,13 @@ RSpec.describe "PokemonsController", type: :request do
     end
 
     it 'store in db' do
-      expect { subject }.to change{ Pokemon.count }.by(1)
+      expect { subject }.to change{ Pokemon.count }.by(2)
+    end
+
+    it 'saves evolution base' do
+      subject
+      new_pokemon = Pokemon.last
+      expect(new_pokemon.evolve_from).to eq(charizard)
     end
   end
 

@@ -93,7 +93,7 @@ describe("CreatePokemonPage", () => {
       name: "charizard",
       type1: "fire",
       type2: "flying",
-      evolveFrom: "charmeleon"
+      evolveFrom: 2
     };
     component.setState(pokemon);
     component.find("form").simulate("submit", { preventDefault: jest.fn() });
@@ -101,7 +101,7 @@ describe("CreatePokemonPage", () => {
     expect(component.instance().props.postPokemon).toHaveBeenCalledWith({
       name: "charizard",
       kind: "fire/flying",
-      evolveFrom: "charmeleon"
+      evolve_from_id: 2
     });
   });
 

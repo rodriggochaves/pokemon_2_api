@@ -37,11 +37,13 @@ export default class CreatePokemonPage extends Component {
   submitForm = event => {
     event.preventDefault();
     const kind = this.translateKind(this.state);
-    const { name, evolveFrom } = this.state;
+    const params = {
+      name: this.state.name,
+      evolve_from_id: this.state.evolve_from_id
+    };
     this.props
       .postPokemon({
-        name,
-        evolveFrom,
+        ...params,
         kind
       })
       .then(() => {
@@ -113,7 +115,7 @@ export default class CreatePokemonPage extends Component {
           <div className="field">
             <label htmlFor="name">Evolve from</label>
             <select
-              name="evolve_from"
+              name="evolve_from_id"
               className="ui fluid dropdown"
               onChange={this.updateField}
             >
