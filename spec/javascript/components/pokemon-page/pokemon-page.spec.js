@@ -10,6 +10,7 @@ describe("PokemonPage", () => {
       return Promise.resolve(null);
     });
     const pokemon = {
+      id: 42,
       name: "Charmander",
       type: "fire",
       evolutions: []
@@ -31,7 +32,7 @@ describe("PokemonPage", () => {
   it("can destroy the pokemon", () => {
     const component = prepareComponent();
     component.find("button[aria-label='destroy']").simulate("click");
-    expect(component.instance().props.destroyPokemon).toHaveBeenCalled();
+    expect(component.instance().props.destroyPokemon).toHaveBeenCalledWith(42);
   });
 
   it("redirect after destroy", async () => {
