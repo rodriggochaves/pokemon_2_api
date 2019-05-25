@@ -1,19 +1,35 @@
-import React, { Component } from "react"
-import ReactDOM from "react-dom"
-import PropTypes from "prop-types"
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import { Redirect } from "react-router";
 
 import Loading from "../loading/loading";
 
 export default class PokemonPage extends Component {
-  componentDidMount() {
-    this.props.fetchPokemon(this.props.pokemonId)
+  constructor() {
+    super();
+    this.state = {
+      redirect: null
+    };
   }
 
+  componentDidMount = () => {
+    this.props.fetchPokemon(this.props.pokemonId);
+  };
+
+  handleDestroyClick = () => {
+    this.props.destroyPokemon().then(() => this.setState({ redirect: "/" }));
+  };
+
   render() {
-    const { pokemon } = this.props
+    const { pokemon } = this.props;
 
     if (this.props.isLoading || !pokemon) {
-      return <Loading />
+      return <Loading />;
+    }
+
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
     }
 
     return (
@@ -27,9 +43,13 @@ export default class PokemonPage extends Component {
             <div key={`EVOLUTION_${evo.id}`}>
               <p>{evo.name}</p>
             </div>
-          )
+          );
         })}
+
+        <button aria-label="destroy" onClick={this.handleDestroyClick}>
+          Destroy this pokemon
+        </button>
       </div>
-    )
+    );
   }
 }
