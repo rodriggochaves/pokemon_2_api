@@ -22,6 +22,22 @@ export const createPokemon = pokemon => ({
   pokemon
 });
 
+export const listKinds = kinds => ({
+  type: "LIST_KINDS",
+  kinds
+});
+
+export const getKinds = () => dispatch => {
+  dispatch(showLoading());
+
+  return fetch("/api/kinds")
+    .then(response => response.json())
+    .then(response => {
+      dispatch(listKinds(response));
+      dispatch(hideLoading());
+    });
+};
+
 export const postPokemon = pokemon => dispatch => {
   dispatch(showLoading());
 

@@ -1,16 +1,18 @@
 import { connect } from "react-redux";
 
 import CreatePokemonPage from "./create-pokemon-page";
-import { postPokemon } from "packs/actions";
+import { postPokemon, getKinds } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    kinds: state.kinds,
     pokemons: state.pokemons
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    getKinds: () => dispatch(getKinds()),
     postPokemon: pokemon => dispatch(postPokemon(pokemon))
   };
 };

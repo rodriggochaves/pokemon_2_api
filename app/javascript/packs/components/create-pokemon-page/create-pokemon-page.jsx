@@ -7,13 +7,13 @@ export default class CreatePokemonPage extends Component {
       name: "",
       type1: null,
       type2: null,
-      evolveFrom: null
+      evolveFrom: null,
     };
   }
 
-  // componentDidMount = () => {
-
-  // }
+  componentDidMount = () => {
+    this.props.getKinds();
+  };
 
   updateField = event => {
     const oldPokemon = this.state;
@@ -70,8 +70,14 @@ export default class CreatePokemonPage extends Component {
                   onChange={this.updateField}
                 >
                   <option value="">Type</option>
-                  <option value="grass">grass</option>
-                  <option value="poison">poison</option>
+                  {this.props.kinds.map(kind => (
+                    <option
+                      key={`KIND_SELECT_${kind.id}`}
+                      value={kind.description}
+                    >
+                      {kind.description}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div className="eight wide field">
@@ -81,8 +87,14 @@ export default class CreatePokemonPage extends Component {
                   onChange={this.updateField}
                 >
                   <option value="">Type</option>
-                  <option value="grass">grass</option>
-                  <option value="poison">poison</option>
+                  {this.props.kinds.map(kind => (
+                    <option
+                      key={`KIND_SELECT_${kind.id}`}
+                      value={kind.description}
+                    >
+                      {kind.description}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

@@ -30,4 +30,21 @@ describe("Actions", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it("can list kinds", () => {
+    const kinds = [{ description: "grass" }, { description: "poison" }];
+    fetchMock.get("/api/kinds", kinds);
+
+    const expectedActions = [
+      { type: "SHOW_LOADING" },
+      { type: "LIST_KINDS", kinds },
+      { type: "HIDE_LOADING" }
+    ];
+
+    const store = mockStore({ kinds: [] });
+
+    return store.dispatch(actions.getKinds()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });
