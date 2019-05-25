@@ -26,7 +26,7 @@ export const postPokemon = pokemon => dispatch => {
   dispatch(showLoading());
 
   return fetch("/api/pokemons", {
-    body: pokemon,
+    body: JSON.stringify(pokemon),
     method: "POST",
     headers: { "content-type": "application/json" }
   })

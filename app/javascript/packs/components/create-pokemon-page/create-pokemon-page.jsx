@@ -20,9 +20,23 @@ export default class CreatePokemonPage extends Component {
     });
   };
 
+  translateKind = attrs => {
+    if (attrs.type2) {
+      return `${attrs.type1}/${attrs.type2}`;
+    } else {
+      return attrs.type1;
+    }
+  };
+
   submitForm = event => {
     event.preventDefault();
-    this.props.postPokemon(this.state);
+    const kind = this.translateKind(this.state);
+    const { name, evolveFrom } = this.state;
+    this.props.postPokemon({
+      name,
+      evolveFrom,
+      kind
+    });
   };
 
   render() {
@@ -31,7 +45,7 @@ export default class CreatePokemonPage extends Component {
         <br />
         <h1>Create Pokemon</h1>
 
-        <form className="ui form">
+        <form className="ui form" onSubmit={this.submitForm}>
           <div className="field">
             <label htmlFor="name">Name</label>
             <input
@@ -84,11 +98,7 @@ export default class CreatePokemonPage extends Component {
           </div>
 
           <div className="field">
-            <input
-              type="submit"
-              className="ui button fluid"
-              onSubmit={this.submitForm}
-            />
+            <input type="submit" className="ui button fluid" />
           </div>
         </form>
       </div>

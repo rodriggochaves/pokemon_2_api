@@ -43,18 +43,18 @@ describe("CreatePokemonPage", () => {
   it("can post a pokemon", () => {
     const component = shallow(<CreatePokemonPage postPokemon={jest.fn()} />);
     const pokemon = {
-      name: "chamander",
+      name: "charizard",
       type1: "fire",
-      type2: null,
-      evolveFrom: null
+      type2: "flying",
+      evolveFrom: "charmeleon"
     };
     component.setState(pokemon);
-    component
-      .find("input[type='submit']")
-      .simulate("submit", { preventDefault: jest.fn() });
+    component.find("form").simulate("submit", { preventDefault: jest.fn() });
 
     expect(component.instance().props.postPokemon).toHaveBeenCalledWith({
-      ...pokemon
+      name: "charizard",
+      kind: "fire/flying",
+      evolveFrom: "charmeleon"
     });
   });
 });

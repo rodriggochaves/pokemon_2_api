@@ -14,7 +14,9 @@ describe("Actions", () => {
       evolve_from: null
     };
 
-    fetchMock.post("/api/pokemons", { pokemon: pokemonToCreate });
+    fetchMock.post("/api/pokemons", {
+      pokemon: pokemonToCreate
+    });
 
     const expectedActions = [
       { type: "SHOW_LOADING" },
