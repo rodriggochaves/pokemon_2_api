@@ -1,5 +1,5 @@
 class PokemonsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:create]
+  skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
 
   def home; end
 
@@ -23,6 +23,12 @@ class PokemonsController < ApplicationController
     pokemon = Pokemon.find(params[:id])
     pokemon.update(pokemon_params)
     render json: pokemon, status: 200
+  end
+
+  def destroy
+    pokemon = Pokemon.find(params[:id])
+    pokemon.destroy
+    head :ok
   end
 
   private def pokemon_params

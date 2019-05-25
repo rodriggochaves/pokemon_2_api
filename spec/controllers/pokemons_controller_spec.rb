@@ -7,7 +7,6 @@ RSpec.describe "PokemonsController", type: :request do
     Poke::Kind.initialize
   end
 
-
   describe "#index returns HTTP 200 " do
     before do
       # improve this with factories
@@ -80,7 +79,7 @@ RSpec.describe "PokemonsController", type: :request do
     end
   end
 
-  describe 'GET /api/pokemon/:id' do
+  describe 'GET /api/pokemons/:id' do
     let(:bulbasaur) { create(:bulbasaur) }
     let(:ivysaur) { create(:ivysaur) }
     let(:venosaur) { create(:venosaur) }
@@ -113,6 +112,22 @@ RSpec.describe "PokemonsController", type: :request do
       subject
       response_body = JSON.parse(response.body)
       expect(response_body['evolutions'].map { |p| p['id'] }).to eq([ivysaur.id, venosaur.id])
+    end
+  end
+
+  describe 'DELETE /api/pokemons/:id' do
+    it "returns HTTP 200 when everything goes right" do
+      pokemon = Pokemon.create(name: "bulbasaur")
+
+      delete "/api/pokemons/#{pokemon.id}"
+      expect(response).to have_http_status(200)
+    end
+
+    it "returns HTTP 200 when everything goes right" do
+      pokemon = Pokemon.create(name: "bulbasaur")
+
+      delete "/api/pokemons/#{pokemon.id}"
+      expect { Pokemon.find(pokemon.id) }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end
