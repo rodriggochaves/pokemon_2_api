@@ -11,6 +11,10 @@ export default class CreatePokemonPage extends Component {
     };
   }
 
+  // componentDidMount = () => {
+
+  // }
+
   updateField = event => {
     const oldPokemon = this.state;
     const key = event.target.name;
@@ -91,9 +95,12 @@ export default class CreatePokemonPage extends Component {
               className="ui fluid dropdown"
               onChange={this.updateField}
             >
-              <option value="">Type</option>
-              <option value="grass">grass</option>
-              <option value="poison">poison</option>
+              <option value="">none</option>
+              {this.props.pokemons.map(pokemon => (
+                <option key={`POKEMON_OPTION_${pokemon.id}`} value={pokemon.id}>
+                  {pokemon.name}
+                </option>
+              ))}
             </select>
           </div>
 

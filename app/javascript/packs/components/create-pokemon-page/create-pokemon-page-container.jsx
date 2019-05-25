@@ -4,7 +4,9 @@ import CreatePokemonPage from "./create-pokemon-page";
 import { postPokemon } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
-  return {};
+  return {
+    pokemons: state.pokemons
+  };
 };
 
 const mapDispatchToProps = dispatch => {
