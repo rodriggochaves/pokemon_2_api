@@ -1,16 +1,19 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-import CreatePokemonPage from './create-pokemon-page';
+import CreatePokemonPage from "./create-pokemon-page";
+import { postPokemon } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
-}
+  return {};
+};
 
 const mapDispatchToProps = dispatch => {
-  return {}
-}
+  return {
+    postPokemon: pokemon => dispatch(postPokemon(pokemon))
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreatePokemonPage)
+)(CreatePokemonPage);
