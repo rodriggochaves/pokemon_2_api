@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import CreatePokemonPage from "./create-pokemon-page";
+import CreatePage from "./create-page";
 import { postPokemon, getKinds } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
@@ -20,4 +20,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreatePokemonPage);
+)(CreatePage);
