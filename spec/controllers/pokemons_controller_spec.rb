@@ -7,7 +7,7 @@ RSpec.describe "PokemonsController", type: :request do
     Poke::Kind.initialize
   end
 
-  describe "#index returns HTTP 200 " do
+  describe "GET /api returns all pokemon" do
     before do
       # improve this with factories
       [['bulbasaur', 1], ['ivysaur', 2], ['venasaur', 3]].each do |poke|
@@ -25,7 +25,8 @@ RSpec.describe "PokemonsController", type: :request do
       expect(parsed[0]).to eq({
         id: bulbasaur.id,
         name: 'bulbasaur',
-        kind: 'grass/poison',
+        kind1: 'grass',
+        kind2: 'poison',
         poke_index: 1,
         evolve_from_id: nil,
         image_url: 'http://image.com'
