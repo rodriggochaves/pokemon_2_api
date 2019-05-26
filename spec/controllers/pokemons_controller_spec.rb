@@ -19,6 +19,7 @@ RSpec.describe "PokemonsController", type: :request do
 
     it { expect(response).to have_http_status(200) }
     it { expect(JSON.parse(response.body).count).to eq(3) }
+    
     it "follows interface" do
       parsed = JSON.parse(response.body)
       bulbasaur = Pokemon.find_by(name: 'bulbasaur')

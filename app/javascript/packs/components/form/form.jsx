@@ -127,7 +127,7 @@ export default class Form extends Component {
             name="evolve_from_id"
             className="ui fluid dropdown"
             onChange={this.updateField}
-            value={pokemon.evolve_from_id}
+            value={pokemon.evolve_from_id || ""}
           >
             <option value="">none</option>
             {this.props.pokemons.map(evolve => (
