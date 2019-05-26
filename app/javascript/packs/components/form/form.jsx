@@ -1,19 +1,51 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 export default class Form extends Component {
   constructor() {
     super();
     this.state = {
       pokemon: {
-        name: ""
+        name: "",
+        kind1: "",
+        kind2: ""
       },
       redirect: null
     };
   }
 
   componentDidMount = () => {
-    // this.state.pokemon = this.props.pokemon || {};
+    this.props.getKinds();
+    if (this.props.pokemon) {
+      this.setState({ pokemon: this.props.pokemon });
+    }
+  };
+
+  translateKind = attrs => {
+    if (attrs.kind2) {
+      return `${attrs.kind1}/${attrs.kind2}`;
+    } else {
+      return attrs.kind1;
+    }
+  };
+
+  submitForm = event => {
+    event.preventDefault();
+    const { pokemon } = this.state;
+    const kind = this.translateKind(pokemon);
+    const params = {
+      name: pokemon.name,
+      evolve_from_id: pokemon.evolve_from_id
+    };
+    this.props
+      .submit({
+        ...params,
+        kind
+      })
+      .then(() => {
+        this.setState({ redirect: "/" });
+      });
   };
 
   updateField = event => {
@@ -28,6 +60,10 @@ export default class Form extends Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />;
+    }
+
     const pokemon = this.state.pokemon;
 
     return (
@@ -47,9 +83,10 @@ export default class Form extends Component {
           <div className="fields">
             <div className="eight wide field">
               <select
-                name="type1"
+                name="kind1"
                 className="ui fluid dropdown"
                 onChange={this.updateField}
+                value={pokemon.kind1}
               >
                 <option value="">Type</option>
                 {this.props.kinds.map(kind => (
@@ -64,9 +101,10 @@ export default class Form extends Component {
             </div>
             <div className="eight wide field">
               <select
-                name="type2"
+                name="kind2"
                 className="ui fluid dropdown"
                 onChange={this.updateField}
+                value={pokemon.kind2}
               >
                 <option value="">Type</option>
                 {this.props.kinds.map(kind => (
@@ -88,10 +126,11 @@ export default class Form extends Component {
             name="evolve_from_id"
             className="ui fluid dropdown"
             onChange={this.updateField}
+            value={pokemon.evolve_from_id}
           >
             <option value="">none</option>
-            {this.props.pokemons.map(pokemon => (
-              <option key={`POKEMON_OPTION_${pokemon.id}`} value={pokemon.id}>
+            {this.props.pokemons.map(evolve => (
+              <option key={`POKEMON_OPTION_${evolve.id}`} value={evolve.id}>
                 {pokemon.name}
               </option>
             ))}
@@ -108,5 +147,6 @@ export default class Form extends Component {
 
 Form.propTypes = {
   // own props
-  pokemon: PropTypes.object
+  pokemon: PropTypes.object,
+  submit: PropTypes.func
 };

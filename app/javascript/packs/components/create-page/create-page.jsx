@@ -15,34 +15,7 @@ export default class CreatePokemonPage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.props.getKinds();
-  };
-
-  translateKind = attrs => {
-    if (attrs.type2) {
-      return `${attrs.type1}/${attrs.type2}`;
-    } else {
-      return attrs.type1;
-    }
-  };
-
-  submitForm = event => {
-    event.preventDefault();
-    const kind = this.translateKind(this.state);
-    const params = {
-      name: this.state.name,
-      evolve_from_id: this.state.evolve_from_id
-    };
-    this.props
-      .postPokemon({
-        ...params,
-        kind
-      })
-      .then(() => {
-        this.setState({ redirect: true });
-      });
-  };
+  componentDidMount = () => {};
 
   render() {
     if (this.state.redirect) {
@@ -54,7 +27,7 @@ export default class CreatePokemonPage extends Component {
         <br />
         <h1>Create Pokemon</h1>
 
-        <FormContainer />
+        <FormContainer submit={this.props.postPokemon} />
       </div>
     );
   }

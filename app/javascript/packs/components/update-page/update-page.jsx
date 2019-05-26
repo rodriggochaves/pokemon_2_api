@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Form from "packs/components/form/form";
+import FormContainer from "../form/form-container";
 
 export default class UpdatePage extends Component {
   render() {
     return (
-      <div>
+      <div className="ui container">
+        <br />
         <h1>Atualizar Pokemon</h1>
 
-        <Form />
+        <FormContainer pokemon={this.props.pokemon} />
       </div>
     );
   }

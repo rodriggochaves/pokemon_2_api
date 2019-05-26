@@ -11,7 +11,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    getKinds: () => dispatch(getKinds())
+  };
 };
 
 export default connect(

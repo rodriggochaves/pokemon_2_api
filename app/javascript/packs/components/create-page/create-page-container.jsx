@@ -12,7 +12,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getKinds: () => dispatch(getKinds()),
     postPokemon: pokemon => dispatch(postPokemon(pokemon))
   };
 };

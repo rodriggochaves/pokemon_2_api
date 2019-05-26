@@ -6,7 +6,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     kinds: state.kinds,
     pokemons: state.pokemons,
-    pokemon: state.pokemons.filter(pokemon => pokemon. === ownProps.pokemonId),
+    pokemon: state.pokemons.find(
+      pokemon => pokemon.id === ownProps.location.query.pokemonId
+    )
   };
 };
 
@@ -17,4 +19,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreatePokemonPage);
+)(UpdatePage);
