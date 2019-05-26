@@ -32,6 +32,24 @@ export const deletePokemon = pokemonId => ({
   pokemonId
 });
 
+export const updatePokemon = pokemon => ({
+  type: "UPDATE_POKEMON",
+  pokemon
+});
+
+export const requestUpdatePokemon = pokemon => dispatch => {
+  dispatch(showLoading());
+
+  return fetch(`/api/pokemons/${pokemon.id}`, {
+    method: "PATCH"
+  })
+    .then(response => response.json())
+    .then(refresh => {
+      dispatch(updatePokemon(refresh));
+      dispatch(hideLoading());
+    });
+};
+
 export const destroyPokemon = pokemonId => dispatch => {
   dispatch(showLoading());
 

@@ -63,4 +63,31 @@ describe("Actions", () => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
+
+  it("can update a pokemon", () => {
+    const pokemons = [{ id: 1, name: "Bulbasaur", kind1: "grass" }];
+    const toUpdate = {
+      id: 1,
+      name: "Bulbasaur",
+      kind1: "grass",
+      kind2: "poison"
+    };
+
+    fetchMock.patch("/api/pokemons/1", toUpdate);
+
+    const expectedActions = [
+      { type: "SHOW_LOADING" },
+      {
+        type: "UPDATE_POKEMON",
+        pokemon: toUpdate
+      },
+      { type: "HIDE_LOADING" }
+    ];
+
+    const store = mockStore({ pokemons });
+
+    return store.dispatch(actions.requestUpdatePokemon(toUpdate)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
 });
