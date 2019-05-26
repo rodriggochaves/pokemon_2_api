@@ -1,16 +1,16 @@
-import React from "react"
+import React from "react";
 
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 export default props => {
-  let pokemons
+  let pokemons;
 
   if (props.query && props.query != "") {
     pokemons = props.pokemons.filter(pokemon =>
       pokemon.name.includes(props.query)
-    )
+    );
   } else {
-    pokemons = props.pokemons
+    pokemons = props.pokemons;
   }
 
   return (
@@ -30,13 +30,22 @@ export default props => {
                 <img src={pokemon.image_url} />
               </td>
               <td>
-                <Link to={{pathname: `/pokemon/${pokemon.id}`, query: {pokemonId: pokemon.id}}}  >{pokemon.name}</Link>
+                <Link
+                  to={{
+                    pathname: `/pokemon/${pokemon.id}`,
+                    query: { pokemonId: pokemon.id }
+                  }}
+                >
+                  {pokemon.name}
+                </Link>
               </td>
-              <td className="ui center aligned">{pokemon.kind}</td>
+              <td className="ui center aligned">{`${pokemon.kind1}/${
+                pokemon.kind2
+              }`}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
-}
+  );
+};

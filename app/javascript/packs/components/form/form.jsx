@@ -9,7 +9,8 @@ export default class Form extends Component {
       pokemon: {
         name: "",
         kind1: "",
-        kind2: ""
+        kind2: "",
+        evolve_from_id: ""
       },
       redirect: null
     };
@@ -131,7 +132,7 @@ export default class Form extends Component {
             <option value="">none</option>
             {this.props.pokemons.map(evolve => (
               <option key={`POKEMON_OPTION_${evolve.id}`} value={evolve.id}>
-                {pokemon.name}
+                {evolve.name}
               </option>
             ))}
           </select>
