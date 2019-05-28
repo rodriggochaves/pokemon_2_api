@@ -31,22 +31,34 @@ export default class Form extends Component {
     }
   };
 
-  submitForm = event => {
-    event.preventDefault();
+  buildParams = () => {
     const { pokemon } = this.state;
     const kind = this.translateKind(pokemon);
     const params = {
       name: pokemon.name,
       evolve_from_id: pokemon.evolve_from_id
     };
-    this.props
-      .submit({
+    if (this.props.pokemon) {
+      return {
+        ...params,
+        id: pokemon.id,
+        kind
+      };
+    } else {
+      return {
         ...params,
         kind
-      })
-      .then(() => {
-        this.setState({ redirect: "/" });
-      });
+      };
+    }
+  };
+
+  // to update correct, we need to send the id
+  submitForm = event => {
+    event.preventDefault();
+    const params = this.buildParams();
+    this.props.submit(params).then(() => {
+      this.setState({ redirect: "/" });
+    });
   };
 
   updateField = event => {

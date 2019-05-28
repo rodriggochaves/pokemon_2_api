@@ -41,7 +41,9 @@ export const requestUpdatePokemon = pokemon => dispatch => {
   dispatch(showLoading());
 
   return fetch(`/api/pokemons/${pokemon.id}`, {
-    method: "PATCH"
+    body: JSON.stringify(pokemon),
+    method: "PATCH",
+    headers: { "content-type": "application/json" }
   })
     .then(response => response.json())
     .then(refresh => {

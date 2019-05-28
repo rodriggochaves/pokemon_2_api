@@ -10,7 +10,10 @@ export default class UpdatePage extends Component {
         <br />
         <h1>Atualizar Pokemon</h1>
 
-        <FormContainer pokemon={this.props.pokemon} />
+        <FormContainer
+          pokemon={this.props.pokemon}
+          submit={this.props.requestUpdatePokemon}
+        />
       </div>
     );
   }

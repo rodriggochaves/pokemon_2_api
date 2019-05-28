@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 
 import UpdatePage from "./update-page";
+import { requestUpdatePokemon } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -13,7 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    requestUpdatePokemon: pokemon => dispatch(requestUpdatePokemon(pokemon))
+  };
 };
 
 export default connect(
