@@ -1,24 +1,26 @@
+import types from "packs/actions/types";
+
 export const showLoading = () => ({ type: "SHOW_LOADING" });
 
 export const hideLoading = () => ({ type: "HIDE_LOADING" });
 
 export const listPokemons = pokemons => ({
-  type: "LIST_POKEMONS",
+  type: types.LIST_POKEMONS,
   pokemons
 });
 
 export const filterPokemons = query => ({
-  type: "FILTER_POKEMONS",
+  type: types.FILTER_POKEMONS,
   query
 });
 
-export const showPokemon = pokemon => ({
-  type: "SHOW_POKEMON",
-  pokemon
+export const showPokemon = pokemonId => ({
+  type: types.SHOW_POKEMON,
+  pokemonId
 });
 
 export const createPokemon = pokemon => ({
-  type: "CREATE_POKEMON",
+  type: types.CREATE_POKEMON,
   pokemon
 });
 
@@ -28,7 +30,7 @@ export const listKinds = kinds => ({
 });
 
 export const deletePokemon = pokemonId => ({
-  type: "DELETE_POKEMON",
+  type: types.DELETE_POKEMON,
   pokemonId
 });
 
