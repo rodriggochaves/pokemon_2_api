@@ -9,8 +9,9 @@ import PokemonPageContainer from "./components/pokemon-page/pokemon-page-contain
 import CreatePageContainer from "./components/create-page/create-page-container";
 import UpdatePageContainer from "packs/components/update-page/update-page-container";
 import pokedexApp from "./reducers";
+import logger from "./utils/logger";
 
-const store = createStore(pokedexApp, applyMiddleware(thunk));
+const store = createStore(pokedexApp, applyMiddleware(thunk, logger));
 
 export default props => {
   return (
