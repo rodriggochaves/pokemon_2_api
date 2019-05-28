@@ -1,5 +1,5 @@
 class PokemonsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:create, :destroy]
+  skip_before_action :verify_authenticity_token, :only => [:create, :destroy, :update]
 
   def home; end
 
