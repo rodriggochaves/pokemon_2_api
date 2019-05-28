@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import CreatePage from "./create-page";
-import { postPokemon, getKinds } from "packs/actions";
+import { postPokemon } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
