@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import PokemonPageContainer from "packs/components/pokemon-page/pokemon-page-container";
 
 export default props => {
   let pokemons;
@@ -30,14 +30,9 @@ export default props => {
                 <img src={pokemon.image_url} />
               </td>
               <td>
-                <Link
-                  to={{
-                    pathname: `/pokemon/${pokemon.id}`,
-                    query: { pokemonId: pokemon.id }
-                  }}
-                >
+                <a onClick={() => props.link(PokemonPageContainer)}>
                   {pokemon.name}
-                </Link>
+                </a>
               </td>
               <td className="ui center aligned">{`${pokemon.kind1}/${
                 pokemon.kind2

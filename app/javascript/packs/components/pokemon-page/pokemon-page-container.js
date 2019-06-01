@@ -7,7 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     isLoading: state.isLoading,
     pokemon: state.pokemon,
-    pokemonId: ownProps.location.query.pokemonId
+    pokemonId: state.selectedPokemon
   };
 };
 
