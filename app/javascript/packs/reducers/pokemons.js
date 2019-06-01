@@ -8,9 +8,6 @@ const pokemons = (state = [], action) => {
     case types.CREATE_POKEMON:
       return state.concat(action.pokemon);
 
-    case types.FILTER_POKEMONS:
-      return state.filter(pokemon => pokemon.name.includes(action.query));
-
     case types.SHOW_POKEMON:
       return state.find(pokemon => pokemon.id == action.pokemonId);
 

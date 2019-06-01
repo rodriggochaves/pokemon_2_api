@@ -27,15 +27,6 @@ describe("Reducers: Pokemons", () => {
     expect(reducer(pokemons, action)).toContain(pokemon);
   });
 
-  it("FILTER_POKEMONS", () => {
-    const action = {
-      type: types.FILTER_POKEMONS,
-      query: "bul"
-    };
-
-    expect(reducer(pokemons, action)).toEqual([{ id: 1, name: "bulbasaur" }]);
-  });
-
   it("SHOW_POKEMON", () => {
     const action = {
       type: types.SHOW_POKEMON,
