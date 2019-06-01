@@ -2,21 +2,22 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-import PokemonListContainer from './components/pokemon-list/pokemon-list-container';
-import PokemonFilterContainer from './components/pokemon-filter/pokemon-filter-container';
-import Loading from './components/loading/loading';
+import PokemonListContainer from "./components/pokemon-list/pokemon-list-container";
+import PokemonFilterContainer from "./components/pokemon-filter/pokemon-filter-container";
+import Loading from "./components/loading/loading";
+import CreatePageContainer from "./components/create-page/create-page-container";
 
 class Pokedex extends Component {
   constructor() {
     super();
     this.state = {
       pokemons: [],
-      isLoading: false,
+      isLoading: false
     };
   }
 
@@ -26,18 +27,23 @@ class Pokedex extends Component {
 
   render() {
     if (this.props.isLoading) {
-      return <Loading />
+      return <Loading />;
     } else {
       return (
         <div className="ui container">
           <br />
           <h1>Pokedex</h1>
-          <Link className="ui button fluid" to={{pathname: "/create/"}}>Create new pokemon</Link>
+          <button
+            className="ui button fluid"
+            onClick={() => this.props.link(CreatePageContainer)}
+          >
+            Create new pokemon
+          </button>
           <br />
           <PokemonFilterContainer />
           <PokemonListContainer />
         </div>
-      )
+      );
     }
   }
 }
