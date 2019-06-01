@@ -1,21 +1,21 @@
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
 
-import PokemonFilter from './pokemon-filter';
-import { filterPokemons } from '../../actions';
+import PokemonFilter from "./pokemon-filter";
+import { filterPokemons } from "../../actions";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
-    query: state.query,
-  }
-}
+    query: state.query
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    onInput: (query) => dispatch(filterPokemons(query))
-  }
-}
+    onInput: query => dispatch(filterPokemons(query))
+  };
+};
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PokemonFilter)
+)(PokemonFilter);
