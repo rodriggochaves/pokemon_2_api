@@ -1,5 +1,7 @@
 import types from "packs/actions/types";
 
+export const link = page => ({ type: types.ROUTE, payload: page });
+
 export const showLoading = () => ({ type: "SHOW_LOADING" });
 
 export const hideLoading = () => ({ type: "HIDE_LOADING" });
