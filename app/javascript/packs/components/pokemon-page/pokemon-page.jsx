@@ -30,7 +30,9 @@ export default class PokemonPage extends Component {
       <div className="ui container">
         <br />
         <h1>{pokemon.name}</h1>
-        <p>{pokemon.kind}</p>
+        <p>
+          {pokemon.kind1}/{pokemon.kind2}
+        </p>
         <h2>Evolutions</h2>
         {pokemon.evolutions.map(evo => {
           return (

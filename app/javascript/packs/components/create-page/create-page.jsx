@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router";
 
 import FormContainer from "packs/components/form/form-container";
 
@@ -18,10 +17,6 @@ export default class CreatePokemonPage extends Component {
   componentDidMount = () => {};
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
-
     return (
       <div className="ui container">
         <br />
