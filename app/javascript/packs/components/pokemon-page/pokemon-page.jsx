@@ -1,22 +1,18 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
 
 import Loading from "../loading/loading";
+import UpdatePageContainer from "packs/components/update-page/update-page-container";
 
 export default class PokemonPage extends Component {
   constructor() {
     super();
     this.state = {
-      redirect: null
+      redirect: null,
+      pokemon: null
     };
   }
-
-  componentDidMount = () => {
-    this.props.fetchPokemon(this.props.pokemonId);
-  };
 
   handleDestroyClick = () => {
     this.props
@@ -32,7 +28,6 @@ export default class PokemonPage extends Component {
     }
 
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
     }
 
     return (
@@ -49,15 +44,13 @@ export default class PokemonPage extends Component {
           );
         })}
 
-        <Link
+        <a
           className="ui button fluid"
-          to={{
-            pathname: `/pokemons/${pokemon.id}/update`,
-            query: { pokemonId: pokemon.id }
-          }}
+          onClick={() => this.props.link(UpdatePageContainer)}
+          aria-label="update"
         >
           update this pokemon
-        </Link>
+        </a>
 
         <button aria-label="destroy" onClick={this.handleDestroyClick}>
           Destroy this pokemon
