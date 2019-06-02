@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import PokemonList from "packs/components/pokemon-list/pokemon-list";
-import { link } from "packs/actions";
+import { selectAndLink } from "packs/actions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    link: page => dispatch(link(page))
+    selectAndLink: (pokemonId, page) => dispatch(selectAndLink(pokemonId, page))
   };
 };
 

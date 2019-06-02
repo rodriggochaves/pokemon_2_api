@@ -1,6 +1,13 @@
 import types from "packs/actions/types";
 
-export const link = page => ({ type: types.ROUTE, payload: page });
+export const link = page => ({ type: types.ROUTE, page: page });
+
+export const selectAndLink = (pokemonId, page) => {
+  return dispatch => {
+    dispatch(selectedPokemon(pokemonId));
+    dispatch(link(page));
+  };
+};
 
 export const showLoading = () => ({ type: "SHOW_LOADING" });
 

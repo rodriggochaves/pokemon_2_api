@@ -30,7 +30,11 @@ export default props => {
                 <img src={pokemon.image_url} />
               </td>
               <td>
-                <a onClick={() => props.link(PokemonPageContainer)}>
+                <a
+                  onClick={() =>
+                    props.selectAndLink(pokemon.id, PokemonPageContainer)
+                  }
+                >
                   {pokemon.name}
                 </a>
               </td>
