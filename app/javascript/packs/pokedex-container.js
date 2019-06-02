@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
-import Pokedex from "./pokedex";
+import Pokedex from "packs/pokedex";
 import { fetchPokemons, link } from "./actions";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     isLoading: state.isLoading,
     pokemonsList: state.pokemons
