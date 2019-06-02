@@ -1,13 +1,11 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 
 import PokemonPage from "packs/components/pokemon-page/pokemon-page";
 
 describe("PokemonPage", () => {
   const prepareComponent = () => {
-    const destroyComponentMock = jest.fn(() => {
-      return Promise.resolve(null);
-    });
+    const destroyComponentMock = jest.fn(() => Promise.resolve(null));
     const pokemon = {
       id: 42,
       name: "Charmander",
@@ -15,7 +13,7 @@ describe("PokemonPage", () => {
       evolutions: []
     };
 
-    const component = mount(
+    const component = shallow(
       <PokemonPage
         pokemon={pokemon}
         fetchPokemon={jest.fn()}
@@ -34,22 +32,22 @@ describe("PokemonPage", () => {
 
   // this tests are skipped because we dont know how to handle the redirect
   // callback. Right now, we get a infinity loop
-  xit("can destroy the pokemon", () => {
+  it("can destroy the pokemon", () => {
     const component = prepareComponent();
     component.find("button[aria-label='destroy']").simulate("click");
     const page = component.find(PokemonPage);
-    expect(page.instance().props.destroyPokemon).toHaveBeenCalledWith(42);
+    expect(component.instance().props.destroyPokemon).toHaveBeenCalledWith(42);
   });
 
-  xit("redirect after destroy", async () => {
+  it("redirect after destroy", async () => {
     const component = prepareComponent();
     await component.find("button[aria-label='destroy']").simulate("click");
-    expect(component.find(Redirect).length).toEqual(1);
+    expect(component.instance().props.link).toHaveBeenCalledWith("pokedex");
   });
 
   it("link to update page", () => {
     const component = prepareComponent();
     component.find("a[aria-label='update']").simulate("click");
-    expect(component.props().link).toHaveBeenCalledWith("update-page");
+    expect(component.instance().props.link).toHaveBeenCalledWith("update-page");
   });
 });

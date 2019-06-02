@@ -16,7 +16,7 @@ export default class PokemonPage extends Component {
   handleDestroyClick = () => {
     this.props
       .destroyPokemon(this.props.pokemon.id)
-      .then(() => this.setState({ redirect: "/" }));
+      .then(() => this.props.link("pokedex"));
   };
 
   render() {
@@ -24,9 +24,6 @@ export default class PokemonPage extends Component {
 
     if (this.props.isLoading || !pokemon) {
       return <Loading />;
-    }
-
-    if (this.state.redirect) {
     }
 
     return (
