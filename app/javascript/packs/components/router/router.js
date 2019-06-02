@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import PokemonPageContainer from "packs/components/pokemon-page/pokemon-page-container";
 import UpdatePageContainer from "packs/components/update-page/update-page-container";
+import CreatePageContainer from "packs/components/create-page/create-page-container";
 import PokedexContainer from "packs/pokedex-container";
 
 const route = page => {
@@ -12,6 +13,9 @@ const route = page => {
 
     case "update-page":
       return UpdatePageContainer;
+
+    case "create-page":
+      return CreatePageContainer;
 
     default:
       return PokedexContainer;

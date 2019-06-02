@@ -3,7 +3,6 @@
 // of the page.
 
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
 import PokemonListContainer from "./components/pokemon-list/pokemon-list-container";
@@ -34,7 +33,8 @@ class Pokedex extends Component {
           <h1>Pokedex</h1>
           <button
             className="ui button fluid"
-            onClick={() => this.props.link(CreatePageContainer)}
+            onClick={() => this.props.link("create-page")}
+            aria-label="create-page"
           >
             Create new pokemon
           </button>

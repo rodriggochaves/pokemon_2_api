@@ -100,7 +100,7 @@ export const postPokemon = pokemon => dispatch => {
   })
     .then(response => response.json())
     .then(response => {
-      dispatch(createPokemon(response.pokemon));
+      dispatch(createPokemon(response));
       dispatch(hideLoading());
     });
 };

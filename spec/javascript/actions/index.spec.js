@@ -10,25 +10,25 @@ const mockStore = configureMockStore(middlewares);
 
 describe("Actions", () => {
   it("can create a pokemon", () => {
-    const pokemonToCreate = {
+    const pokemon = {
       name: "bulbasaur",
       kind: "grass/poison",
       evolve_from: null
     };
 
     fetchMock.post("/api/pokemons", {
-      pokemon: pokemonToCreate
+      ...pokemon
     });
 
     const expectedActions = [
       { type: "SHOW_LOADING" },
-      { type: "CREATE_POKEMON", pokemon: pokemonToCreate },
+      { type: "CREATE_POKEMON", pokemon },
       { type: "HIDE_LOADING" }
     ];
 
     const store = mockStore({ pokemon: undefined });
 
-    return store.dispatch(actions.postPokemon(pokemonToCreate)).then(() => {
+    return store.dispatch(actions.postPokemon(pokemon)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
