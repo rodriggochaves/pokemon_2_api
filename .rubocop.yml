@@ -1,0 +1,15 @@
+AllCops:
+  Exclude:
+    - "bin/**/*"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+    - ".git/**/*"
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Max: 150

@@ -5,7 +5,7 @@ module Poke
     def self.query_kanto_pokedex
       response = RestClient.get("#{ENV['POKEMON_API']}/pokedex/kanto")
       parsed_response = JSON.parse(response.body)
-      pokemons = parsed_response['pokemon_entries'].map do |entry|
+      parsed_response['pokemon_entries'].map do |entry|
         entry['pokemon_species']['name']
       end
     end
@@ -37,9 +37,7 @@ module Poke
     def self.query_evolves_from_species(name)
       response = RestClient.get("#{ENV['POKEMON_API']}/pokemon-species/#{name}")
       parsed_response = JSON.parse(response.body)
-      if parsed_response['evolves_from_species']
-        parsed_response['evolves_from_species']['name']
-      end
+      parsed_response['evolves_from_species']['name'] if parsed_response['evolves_from_species']
     end
 
     def self.kinds
