@@ -27,15 +27,6 @@ describe("Reducers: Pokemons", () => {
     expect(reducer(pokemons, action)).toContain(pokemon);
   });
 
-  it("SHOW_POKEMON", () => {
-    const action = {
-      type: types.SHOW_POKEMON,
-      pokemonId: 1
-    };
-
-    expect(reducer(pokemons, action)).toEqual({ id: 1, name: "bulbasaur" });
-  });
-
   it("DELETE_POKEMON", () => {
     const action = {
       type: types.DELETE_POKEMON,
