@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
 
 export default class Form extends Component {
   constructor() {
@@ -57,7 +56,7 @@ export default class Form extends Component {
     event.preventDefault();
     const params = this.buildParams();
     this.props.submit(params).then(() => {
-      this.setState({ redirect: "/" });
+      this.props.link("pokedex");
     });
   };
 
@@ -159,6 +158,9 @@ export default class Form extends Component {
 }
 
 Form.propTypes = {
+  // redux
+  link: PropTypes.func,
+
   // own props
   pokemon: PropTypes.object,
   submit: PropTypes.func

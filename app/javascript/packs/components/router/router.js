@@ -1,5 +1,30 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default props => {
-  return <props.component />;
+import PokemonPageContainer from "packs/components/pokemon-page/pokemon-page-container";
+import UpdatePageContainer from "packs/components/update-page/update-page-container";
+import PokedexContainer from "packs/pokedex-container";
+
+const route = page => {
+  switch (page) {
+    case "pokemon-page":
+      return PokemonPageContainer;
+
+    case "update-page":
+      return UpdatePageContainer;
+
+    default:
+      return PokedexContainer;
+  }
 };
+
+const Router = props => {
+  const Component = route(props.component);
+  return <Component />;
+};
+
+Router.propTypes = {
+  component: PropTypes.string
+};
+
+export default Router;

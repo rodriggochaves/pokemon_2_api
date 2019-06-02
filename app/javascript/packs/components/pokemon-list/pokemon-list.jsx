@@ -1,7 +1,5 @@
 import React from "react";
 
-import PokemonPageContainer from "packs/components/pokemon-page/pokemon-page-container";
-
 export default props => {
   let pokemons;
 
@@ -32,7 +30,7 @@ export default props => {
               <td>
                 <a
                   onClick={() =>
-                    props.selectAndLink(pokemon.id, PokemonPageContainer)
+                    props.selectAndLink(pokemon.id, "pokemon-page")
                   }
                 >
                   {pokemon.name}

@@ -5,14 +5,14 @@ import actionsTypes from "packs/actions/types";
 
 describe("Reducers: Router", () => {
   it("initial state", () => {
-    expect(reducer(undefined, { type: undefined })).toEqual(PokedexContainer);
+    expect(reducer(undefined, { type: undefined })).toEqual("pokedex");
   });
 
   it("ROUTE action", () => {
     const action = {
       type: actionsTypes.ROUTE,
-      page: PokemonPageContainer
+      page: "pokemon-page"
     };
-    expect(reducer(undefined, action)).toEqual(PokemonPageContainer);
+    expect(reducer(undefined, action)).toEqual("pokemon-page");
   });
 });

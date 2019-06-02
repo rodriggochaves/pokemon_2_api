@@ -122,4 +122,23 @@ describe("Form", () => {
       expect(value).toEqual(1);
     });
   });
+
+  it("redirects to home page after submit", async () => {
+    const pokemon = pokemons[1];
+    const component = shallow(
+      <Form
+        kinds={kinds}
+        pokemons={pokemons}
+        getKinds={jest.fn()}
+        pokemon={pokemon}
+        submit={jest.fn(() => Promise.resolve(null))}
+        link={jest.fn()}
+      />
+    );
+
+    await component
+      .find("form")
+      .simulate("submit", { preventDefault: jest.fn() });
+    expect(component.instance().props.link).toHaveBeenCalledWith("pokedex");
+  });
 });

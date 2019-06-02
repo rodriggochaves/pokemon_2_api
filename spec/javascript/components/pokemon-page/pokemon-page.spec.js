@@ -49,6 +49,7 @@ describe("PokemonPage", () => {
 
   it("link to update page", () => {
     const component = prepareComponent();
-    expect(component.find("a[aria-label='update']").length).toEqual(1);
+    component.find("a[aria-label='update']").simulate("click");
+    expect(component.props().link).toHaveBeenCalledWith("update-page");
   });
 });

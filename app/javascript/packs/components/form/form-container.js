@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
-import Form from "./form";
-import { postPokemon, getKinds } from "packs/actions";
+import Form from "packs/components/form/form";
+import { getKinds, link } from "packs/actions";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     kinds: state.kinds,
     pokemons: state.pokemons
@@ -12,7 +12,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getKinds: () => dispatch(getKinds())
+    getKinds: () => dispatch(getKinds()),
+    link: page => dispatch(link(page))
   };
 };
 

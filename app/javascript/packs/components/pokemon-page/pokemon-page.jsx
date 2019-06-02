@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
 import Loading from "../loading/loading";
@@ -46,7 +45,7 @@ export default class PokemonPage extends Component {
 
         <a
           className="ui button fluid"
-          onClick={() => this.props.link(UpdatePageContainer)}
+          onClick={() => this.props.link("update-page")}
           aria-label="update"
         >
           update this pokemon
