@@ -2,6 +2,8 @@ import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import * as actions from "packs/actions";
 import fetchMock from "fetch-mock";
+import PokemonPageContainer from "packs/components/pokemon-page/pokemon-page-container";
+import types from "packs/actions/types";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -89,5 +91,17 @@ describe("Actions", () => {
     return store.dispatch(actions.requestUpdatePokemon(toUpdate)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
+  });
+
+  it("can select pokemon and redirect to a page", () => {
+    const expectedActions = [
+      { type: types.SELECT_POKEMON, selectedPokemon: 2 },
+      { type: types.ROUTE, page: PokemonPageContainer }
+    ];
+
+    const store = mockStore({ router: undefined, selectedPokemon: undefined });
+
+    store.dispatch(actions.selectAndLink(2, PokemonPageContainer));
+    expect(store.getActions()).toEqual(expectedActions);
   });
 });
