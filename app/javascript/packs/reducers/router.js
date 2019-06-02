@@ -4,7 +4,7 @@ import PokedexContainer from "packs/pokedex-container";
 export default (state = PokedexContainer, action) => {
   switch (action.type) {
     case actionsTypes.ROUTE:
-      return action.payload;
+      return action.page;
 
     default:
       return state;

@@ -11,7 +11,7 @@ describe("Reducers: Router", () => {
   it("ROUTE action", () => {
     const action = {
       type: actionsTypes.ROUTE,
-      payload: PokemonPageContainer
+      page: PokemonPageContainer
     };
     expect(reducer(undefined, action)).toEqual(PokemonPageContainer);
   });
