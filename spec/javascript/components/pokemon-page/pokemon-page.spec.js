@@ -51,6 +51,6 @@ describe("PokemonPage", () => {
 
   it("link to update page", () => {
     const component = prepareComponent();
-    expect(component.find("a[href='/pokemons/42/update']").length).toEqual(1);
+    expect(component.find("a[aria-label='update']").length).toEqual(1);
   });
 });

@@ -8,7 +8,7 @@ const mapStateToProps = (state, ownProps) => {
     kinds: state.kinds,
     pokemons: state.pokemons,
     pokemon: state.pokemons.find(
-      pokemon => pokemon.id === ownProps.location.query.pokemonId
+      pokemon => pokemon.id === state.selectedPokemon
     )
   };
 };

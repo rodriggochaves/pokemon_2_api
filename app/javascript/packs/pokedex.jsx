@@ -5,7 +5,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 import PokemonListContainer from "./components/pokemon-list/pokemon-list-container";
 import PokemonFilterContainer from "./components/pokemon-filter/pokemon-filter-container";
