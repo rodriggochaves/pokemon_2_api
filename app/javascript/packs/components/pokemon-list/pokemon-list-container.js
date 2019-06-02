@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PokemonList from "packs/components/pokemon-list/pokemon-list";
 import { selectAndLink } from "packs/actions";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     pokemons: state.pokemons,
     query: state.filterPokemons

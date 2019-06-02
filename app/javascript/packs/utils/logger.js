@@ -1,4 +1,5 @@
 export default store => next => action => {
+  /* eslint-disable no-console */
   console.group(action.type);
   console.info("previous state", store.getState());
   console.info("dispatching", action);

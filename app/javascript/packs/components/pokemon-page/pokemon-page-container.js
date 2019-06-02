@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 
 import PokemonPage from "./pokemon-page";
-import { fetchPokemon, destroyPokemon, link } from "../../actions";
+import { destroyPokemon, link } from "../../actions";
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     isLoading: state.isLoading,
     pokemonId: state.selectedPokemon,

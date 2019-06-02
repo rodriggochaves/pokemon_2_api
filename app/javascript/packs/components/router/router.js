@@ -8,17 +8,17 @@ import PokedexContainer from "packs/pokedex-container";
 
 const route = page => {
   switch (page) {
-    case "pokemon-page":
-      return PokemonPageContainer;
+  case "pokemon-page":
+    return PokemonPageContainer;
 
-    case "update-page":
-      return UpdatePageContainer;
+  case "update-page":
+    return UpdatePageContainer;
 
-    case "create-page":
-      return CreatePageContainer;
+  case "create-page":
+    return CreatePageContainer;
 
-    default:
-      return PokedexContainer;
+  default:
+    return PokedexContainer;
   }
 };
 
