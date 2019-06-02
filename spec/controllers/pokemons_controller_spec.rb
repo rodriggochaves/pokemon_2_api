@@ -9,29 +9,32 @@ RSpec.describe "PokemonsController", type: :request do
 
   describe "GET /api returns all pokemon" do
     before do
-      # improve this with factories
-      [['bulbasaur', 1], ['ivysaur', 2], ['venasaur', 3]].each do |poke|
-        Pokemon.create!(name: poke[0], kind: [Kind['grass'], Kind['poison']], poke_index: poke[1],
-                        image_url: "http://image.com")
-      end
+      bulbasaur = create(:bulbasaur)
+      ivysaur = create(:ivysaur)
+      venosaur = create(:venosaur)
+
+      ivysaur.update(evolve_from: bulbasaur)
+      venosaur.update(evolve_from: ivysaur)
+
       get '/api'
     end
 
     it { expect(response).to have_http_status(200) }
     it { expect(JSON.parse(response.body).count).to eq(3) }
     
-    it "follows interface" do
-      parsed = JSON.parse(response.body)
-      bulbasaur = Pokemon.find_by(name: 'bulbasaur')
-      expect(parsed[0]).to eq({
-        id: bulbasaur.id,
-        name: 'bulbasaur',
-        kind1: 'grass',
-        kind2: 'poison',
-        poke_index: 1,
-        evolve_from_id: nil,
-        image_url: 'http://image.com'
-      }.stringify_keys)
+    describe "the response body" do
+      let(:body) { JSON.parse(response.body) }
+      let(:bulbasaur) { Pokemon.find_by(name: 'bulbasaur') }
+
+      it { expect(body.first['id']).to eq(bulbasaur.id) }
+      it { expect(body.first['name']).to eq("bulbasaur") }
+      it { expect(body.first['kind1']).to eq("grass") }
+      it { expect(body.first['kind2']).to eq("poison") }
+      it { expect(body.first['poke_index']).to eq(1) }
+      it { expect(body.first['evolve_from']).to eq(nil) }
+      it { expect(body.first['image_url']).to eq("http://image.com/bulbasaur") }
+      it { expect(body.first['evolutions'][0]['name']).to eq("ivysaur") }
+      it { expect(body.first['evolutions'][1]['name']).to eq("venosaur") }
     end
   end
 

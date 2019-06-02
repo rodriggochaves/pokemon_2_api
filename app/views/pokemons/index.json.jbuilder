@@ -6,4 +6,8 @@ json.array! @pokemons do |pokemon|
   json.poke_index pokemon.poke_index
   json.evolve_from_id pokemon.evolve_from_id
   json.image_url pokemon.image_url
+  json.evolutions pokemon.evolutions do |evolution|
+    json.id evolution.id
+    json.name evolution.name
+  end
 end
