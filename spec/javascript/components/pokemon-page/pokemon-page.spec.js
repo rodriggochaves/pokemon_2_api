@@ -1,6 +1,5 @@
 import React from "react";
 import { mount } from "enzyme";
-import { MemoryRouter } from "react-router-dom";
 
 import PokemonPage from "packs/components/pokemon-page/pokemon-page";
 
@@ -17,13 +16,12 @@ describe("PokemonPage", () => {
     };
 
     const component = mount(
-      <MemoryRouter initialEntries={["/pokemons/42"]} initialIndex={0}>
-        <PokemonPage
-          pokemon={pokemon}
-          fetchPokemon={jest.fn()}
-          destroyPokemon={destroyComponentMock}
-        />
-      </MemoryRouter>
+      <PokemonPage
+        pokemon={pokemon}
+        fetchPokemon={jest.fn()}
+        destroyPokemon={destroyComponentMock}
+        link={jest.fn()}
+      />
     );
 
     return component;

@@ -2,12 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter, Route } from "react-router-dom";
 
-import PokedexContainer from "./pokedex-container";
-import PokemonPageContainer from "./components/pokemon-page/pokemon-page-container";
-import CreatePageContainer from "./components/create-page/create-page-container";
-import UpdatePageContainer from "packs/components/update-page/update-page-container";
 import RouterContainer from "packs/components/router/router-container";
 import pokedexApp from "./reducers";
 import logger from "./utils/logger";
