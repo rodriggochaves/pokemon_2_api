@@ -21,6 +21,11 @@ export const showPokemon = pokemonId => ({
   pokemonId
 });
 
+export const selectedPokemon = pokemonId => ({
+  type: types.SELECT_POKEMON,
+  selectedPokemon: pokemonId
+});
+
 export const createPokemon = pokemon => ({
   type: types.CREATE_POKEMON,
   pokemon

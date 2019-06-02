@@ -1,7 +1,9 @@
+import types from "packs/actions/types";
+
 export default (state = null, action) => {
   switch (action.type) {
-    case "SHOW_POKEMON":
-      return action.selectedPokemonId;
+    case types.SELECT_POKEMON:
+      return action.selectedPokemon;
 
     default:
       return state;

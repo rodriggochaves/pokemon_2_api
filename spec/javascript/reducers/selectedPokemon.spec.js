@@ -1,4 +1,5 @@
 import reducer from "packs/reducers/selected-pokemon";
+import types from "packs/actions/types";
 
 describe("Reducers: selectedPokemon", () => {
   it("returns the initial state", () => {
@@ -6,7 +7,7 @@ describe("Reducers: selectedPokemon", () => {
   });
 
   it("returns the pokemonId", () => {
-    const action = { type: "SHOW_POKEMON", selectedPokemonId: 4 };
+    const action = { type: types.SELECT_POKEMON, selectedPokemon: 4 };
     expect(reducer(undefined, action)).toEqual(4);
   });
 });
