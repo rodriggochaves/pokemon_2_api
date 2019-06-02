@@ -1,22 +1,24 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :bulbasaur, class: Pokemon do
-    name { "bulbasaur" }
+    name { 'bulbasaur' }
     kind { [Kind['grass'], Kind['poison']] }
     poke_index { 1 }
-    image_url { "http://image.com/bulbasaur" }
+    image_url { 'http://image.com/bulbasaur' }
   end
 
   factory :ivysaur, class: Pokemon do
-    name { "ivysaur" }
+    name { 'ivysaur' }
     kind { [Kind['grass'], Kind['poison']] }
     poke_index { 2 }
-    image_url { "http://image.com/ivysaur" }
+    image_url { 'http://image.com/ivysaur' }
   end
 
   factory :venosaur, class: Pokemon do
-    name { "venosaur" }
+    name { 'venosaur' }
     kind { [Kind['grass'], Kind['poison']] }
     poke_index { 3 }
-    image_url { "http://image.com/venosaur" }
+    image_url { 'http://image.com/venosaur' }
   end
 end

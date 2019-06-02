@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class PokemonsController < ApplicationController
-  skip_before_action :verify_authenticity_token, :only => [:create, :destroy, :update]
+  skip_before_action :verify_authenticity_token, only: %i[create destroy update]
 
   def home; end
 
   def index
     @pokemons = Pokemon.all
-    render "index.json"
+    render 'index.json'
   end
 
   def show
     @pokemon = Pokemon.find(params[:id])
-    render "show.json"
+    render 'show.json'
   end
 
   def create

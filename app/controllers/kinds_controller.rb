@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class KindsController < ApplicationController
   def index
     kinds = Kind.all

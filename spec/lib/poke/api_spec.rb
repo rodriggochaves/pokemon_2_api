@@ -1,11 +1,13 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe Poke::Api do
   before(:each) do
     @real_endpoint = ENV['POKEMON_API']
     ENV['POKEMON_API'] = 'https://pokeapi.co/api/v2'
     response = File.read('spec/lib/poke/mocks/kind.json')
-    stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
+    stub_request(:get, 'https://pokeapi.co/api/v2/type').to_return(body: response)
     Poke::Kind.initialize
   end
 
@@ -13,24 +15,24 @@ RSpec.describe Poke::Api do
     ENV['POKEMON_API'] = @real_endpoint
   end
 
-  describe "#find returns a pokemon" do
+  describe '#find returns a pokemon' do
     before do
       response = File.read('spec/lib/poke/mocks/pokemon_1.json')
-      stub_request(:get, "https://pokeapi.co/api/v2/pokemon/1").to_return(body: response)
+      stub_request(:get, 'https://pokeapi.co/api/v2/pokemon/1').to_return(body: response)
     end
 
     subject(:pokemon) { described_class.find(1) }
 
-    it { expect(pokemon.name).to eq("bulbasaur") }
+    it { expect(pokemon.name).to eq('bulbasaur') }
     it { expect(pokemon.poke_index).to eq(1) }
     it do
-      expect(pokemon.image_url).to eq("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
+      expect(pokemon.image_url).to eq('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png')
     end
   end
 
-  it "#query_kanto_pokedex returns all 151 names" do
+  it '#query_kanto_pokedex returns all 151 names' do
     response = File.read('spec/lib/poke/mocks/pokedex_kanto.json')
-    stub_request(:get, "https://pokeapi.co/api/v2/pokedex/kanto").to_return(body: response)
+    stub_request(:get, 'https://pokeapi.co/api/v2/pokedex/kanto').to_return(body: response)
 
     pokemon_names = described_class.query_kanto_pokedex
     expect(pokemon_names.count).to eq(151)
@@ -38,7 +40,7 @@ RSpec.describe Poke::Api do
 
   it '#query_evolves_from_species returns nil if dont exists' do
     response = File.read('spec/lib/poke/mocks/pokemon_species_1.json')
-    stub_request(:get, "https://pokeapi.co/api/v2/pokemon-species/bulbasaur").to_return(body: response)
+    stub_request(:get, 'https://pokeapi.co/api/v2/pokemon-species/bulbasaur').to_return(body: response)
 
     base_species = described_class.query_evolves_from_species('bulbasaur')
     expect(base_species).to eq(nil)
@@ -46,7 +48,7 @@ RSpec.describe Poke::Api do
 
   it '#query_evolves_from_species returns the name of the base pokemon' do
     response = File.read('spec/lib/poke/mocks/pokemon_species_2.json')
-    stub_request(:get, "https://pokeapi.co/api/v2/pokemon-species/ivysaur").to_return(body: response)
+    stub_request(:get, 'https://pokeapi.co/api/v2/pokemon-species/ivysaur').to_return(body: response)
 
     base_species = described_class.query_evolves_from_species('ivysaur')
     expect(base_species).to eq('bulbasaur')
@@ -55,7 +57,7 @@ RSpec.describe Poke::Api do
   describe '#kinds returns all kinds' do
     before(:each) do
       response = File.read('spec/lib/poke/mocks/kind.json')
-      stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
+      stub_request(:get, 'https://pokeapi.co/api/v2/type').to_return(body: response)
     end
 
     subject { described_class.kinds }

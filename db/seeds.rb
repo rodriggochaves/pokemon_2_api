@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Poke::Kind.initialize
 
 Poke::Api.query_kanto_pokedex.map do |pokemon|

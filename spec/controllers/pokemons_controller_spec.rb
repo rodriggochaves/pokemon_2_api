@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "PokemonsController", type: :request do
+RSpec.describe 'PokemonsController', type: :request do
   before(:each) do
     response = File.read('spec/lib/poke/mocks/kind.json')
-    stub_request(:get, "https://pokeapi.co/api/v2/type").to_return(body: response)
+    stub_request(:get, 'https://pokeapi.co/api/v2/type').to_return(body: response)
     Poke::Kind.initialize
   end
 
-  describe "GET /api returns all pokemon" do
+  describe 'GET /api returns all pokemon' do
     before do
       bulbasaur = create(:bulbasaur)
       ivysaur = create(:ivysaur)
@@ -21,26 +23,26 @@ RSpec.describe "PokemonsController", type: :request do
 
     it { expect(response).to have_http_status(200) }
     it { expect(JSON.parse(response.body).count).to eq(3) }
-    
-    describe "the response body" do
+
+    describe 'the response body' do
       let(:body) { JSON.parse(response.body) }
       let(:bulbasaur) { Pokemon.find_by(name: 'bulbasaur') }
 
       it { expect(body.first['id']).to eq(bulbasaur.id) }
-      it { expect(body.first['name']).to eq("bulbasaur") }
-      it { expect(body.first['kind1']).to eq("grass") }
-      it { expect(body.first['kind2']).to eq("poison") }
+      it { expect(body.first['name']).to eq('bulbasaur') }
+      it { expect(body.first['kind1']).to eq('grass') }
+      it { expect(body.first['kind2']).to eq('poison') }
       it { expect(body.first['poke_index']).to eq(1) }
       it { expect(body.first['evolve_from']).to eq(nil) }
-      it { expect(body.first['image_url']).to eq("http://image.com/bulbasaur") }
-      it { expect(body.first['evolutions'][0]['name']).to eq("ivysaur") }
-      it { expect(body.first['evolutions'][1]['name']).to eq("venosaur") }
+      it { expect(body.first['image_url']).to eq('http://image.com/bulbasaur') }
+      it { expect(body.first['evolutions'][0]['name']).to eq('ivysaur') }
+      it { expect(body.first['evolutions'][1]['name']).to eq('venosaur') }
     end
   end
 
   describe 'POST /api/pokemons can create a new pokemon' do
     let(:charizard) do
-      Pokemon.create(name: "Charizard")
+      Pokemon.create(name: 'Charizard')
     end
 
     subject do
@@ -58,7 +60,7 @@ RSpec.describe "PokemonsController", type: :request do
     end
 
     it 'store in db' do
-      expect { subject }.to change{ Pokemon.count }.by(2)
+      expect { subject }.to change { Pokemon.count }.by(2)
     end
 
     it 'saves evolution base' do
@@ -70,16 +72,16 @@ RSpec.describe "PokemonsController", type: :request do
 
   describe 'PATCH /api/pokemons/:id can update a pokemon' do
     let(:charizard) do
-      Pokemon.create!({
+      Pokemon.create!(
         name: 'Mega Charizard',
         kind: [Kind['fire']],
-        poke_index: 6,
-      })
+        poke_index: 6
+      )
     end
 
     subject do
       patch "/api/pokemons/#{charizard.id}", params: {
-        kind: 'fire/flying',
+        kind: 'fire/flying'
       }
     end
 
@@ -107,18 +109,18 @@ RSpec.describe "PokemonsController", type: :request do
 
     subject { get "/api/pokemons/#{bulbasaur.id}" }
 
-    it do 
+    it do
       subject
       expect(response).to have_http_status(200)
     end
 
-    it 'returns name' do 
+    it 'returns name' do
       subject
       response_body = JSON.parse(response.body)
       expect(response_body['name']).to eq('bulbasaur')
     end
 
-    it 'returns kind' do 
+    it 'returns kind' do
       subject
       response_body = JSON.parse(response.body)
       expect(response_body['kind']).to eq('grass/poison')
@@ -132,15 +134,15 @@ RSpec.describe "PokemonsController", type: :request do
   end
 
   describe 'DELETE /api/pokemons/:id' do
-    it "returns HTTP 200 when everything goes right" do
-      pokemon = Pokemon.create(name: "bulbasaur")
+    it 'returns HTTP 200 when everything goes right' do
+      pokemon = Pokemon.create(name: 'bulbasaur')
 
       delete "/api/pokemons/#{pokemon.id}"
       expect(response).to have_http_status(200)
     end
 
-    it "returns HTTP 200 when everything goes right" do
-      pokemon = Pokemon.create(name: "bulbasaur")
+    it 'returns HTTP 200 when everything goes right' do
+      pokemon = Pokemon.create(name: 'bulbasaur')
 
       delete "/api/pokemons/#{pokemon.id}"
       expect { Pokemon.find(pokemon.id) }.to raise_error(ActiveRecord::RecordNotFound)

@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 module Poke
   module Api
-    def Api.query_kanto_pokedex
+    def self.query_kanto_pokedex
       response = RestClient.get("#{ENV['POKEMON_API']}/pokedex/kanto")
       parsed_response = JSON.parse(response.body)
-      pokemons = parsed_response["pokemon_entries"].map do |entry|
-        entry["pokemon_species"]["name"]
+      pokemons = parsed_response['pokemon_entries'].map do |entry|
+        entry['pokemon_species']['name']
       end
     end
 
-    def Api.find(index)
+    def self.find(index)
       response = RestClient.get("#{ENV['POKEMON_API']}/pokemon/#{index}")
       parsed_response = JSON.parse(response.body)
       pokemon_data = {
@@ -20,19 +22,19 @@ module Poke
       Pokemon.new(pokemon_data)
     end
 
-    def Api.extract_kind(response)
+    def self.extract_kind(response)
       response['types'].map do |t|
         description = t['type']['name']
         ::Kind[description]
       end
     end
 
-    def Api.extract_poke_index(response)
-      response["game_indices"]
-        .find{ |index| index["version"]["name"] == 'firered' }['game_index']
+    def self.extract_poke_index(response)
+      response['game_indices']
+        .find { |index| index['version']['name'] == 'firered' }['game_index']
     end
 
-    def Api.query_evolves_from_species(name)
+    def self.query_evolves_from_species(name)
       response = RestClient.get("#{ENV['POKEMON_API']}/pokemon-species/#{name}")
       parsed_response = JSON.parse(response.body)
       if parsed_response['evolves_from_species']
@@ -40,7 +42,7 @@ module Poke
       end
     end
 
-    def Api.kinds
+    def self.kinds
       response = RestClient.get("#{ENV['POKEMON_API']}/type")
       parsed_response = JSON.parse(response.body)
 
