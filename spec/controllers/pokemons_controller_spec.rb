@@ -41,6 +41,10 @@ RSpec.describe 'PokemonsController', type: :request do
   end
 
   describe 'POST /api/pokemons can create a new pokemon' do
+    before(:each) do
+      allow(Cloudinary::Uploader).to receive(:upload).and_return(image_url: 'https://image.com/123')
+    end
+
     let(:charizard) do
       Pokemon.create(name: 'Charizard')
     end
