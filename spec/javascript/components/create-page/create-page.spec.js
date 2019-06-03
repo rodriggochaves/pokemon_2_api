@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { Redirect } from "react-router";
 
 import CreatePage from "packs/components/create-page/create-page";
 

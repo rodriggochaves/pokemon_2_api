@@ -9,7 +9,8 @@ export default class Form extends Component {
         name: "",
         kind1: "",
         kind2: "",
-        evolve_from_id: ""
+        evolve_from_id: "",
+        file: ""
       },
       redirect: null
     };
@@ -35,7 +36,8 @@ export default class Form extends Component {
     const kind = this.translateKind(pokemon);
     const params = {
       name: pokemon.name,
-      evolve_from_id: pokemon.evolve_from_id
+      evolve_from_id: pokemon.evolve_from_id,
+      image: pokemon.file
     };
     if (this.props.pokemon) {
       return {
@@ -71,15 +73,28 @@ export default class Form extends Component {
     });
   };
 
-  render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
-    }
+  handleFile = event => {
+    const reader = new FileReader();
+    const file = event.target.files[0];
 
+    reader.onloadend = () => {
+      const pokemon = this.state.pokemon;
+      const state = { ...pokemon, file: file };
+      this.setState({ pokemon: state });
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  render() {
     const pokemon = this.state.pokemon;
 
     return (
-      <form className="ui form" onSubmit={this.submitForm}>
+      <form
+        className="ui form"
+        onSubmit={this.submitForm}
+        encType="multipart/form-data"
+      >
         <div className="field">
           <label htmlFor="name">Name</label>
           <input
@@ -147,6 +162,11 @@ export default class Form extends Component {
               </option>
             ))}
           </select>
+        </div>
+
+        <div className="field">
+          <label htmlFor="name">Image URL</label>
+          <input type="file" name="image" onChange={this.handleFile} />
         </div>
 
         <div className="field">
