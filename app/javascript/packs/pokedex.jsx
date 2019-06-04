@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 import PokemonListContainer from "./components/pokemon-list/pokemon-list-container";
 import PokemonFilterContainer from "./components/pokemon-filter/pokemon-filter-container";
-import Loading from "./components/loading/loading";
 
 class Pokedex extends Component {
   constructor() {
@@ -18,7 +17,7 @@ class Pokedex extends Component {
     };
   }
 
-  propTypes = {
+  static propTypes = {
     // redux
     isLoading: PropTypes.bool,
     link: PropTypes.func,
@@ -30,26 +29,22 @@ class Pokedex extends Component {
   }
 
   render() {
-    if (this.props.isLoading) {
-      return <Loading />;
-    } else {
-      return (
-        <div className="ui container">
-          <br />
-          <h1>Pokedex</h1>
-          <button
-            className="ui button fluid"
-            onClick={() => this.props.link("create-page")}
-            aria-label="create-page"
-          >
-            Create new pokemon
-          </button>
-          <br />
-          <PokemonFilterContainer />
-          <PokemonListContainer />
-        </div>
-      );
-    }
+    return (
+      <div className="ui container">
+        <br />
+        <h1>Pokedex</h1>
+        <button
+          className="ui button fluid"
+          onClick={() => this.props.link("create-page")}
+          aria-label="create-page"
+        >
+          Create new pokemon
+        </button>
+        <br />
+        <PokemonFilterContainer />
+        <PokemonListContainer />
+      </div>
+    );
   }
 }
 

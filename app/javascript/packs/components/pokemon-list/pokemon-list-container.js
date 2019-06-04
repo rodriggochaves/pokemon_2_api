@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import PokemonList from "packs/components/pokemon-list/pokemon-list";
-import { selectAndLink } from "packs/actions";
+import { selectAndLink, fetchAllPokemons } from "packs/actions";
 
 const mapStateToProps = state => {
   return {
@@ -12,7 +12,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectAndLink: (pokemonId, page) => dispatch(selectAndLink(pokemonId, page))
+    selectAndLink: (pokemonId, page) =>
+      dispatch(selectAndLink(pokemonId, page)),
+    fetchAllPokemons: () => dispatch(fetchAllPokemons())
   };
 };
 
