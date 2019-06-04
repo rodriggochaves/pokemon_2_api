@@ -12,7 +12,8 @@ export default class PokemonList extends Component {
     fetchAllPokemons: PropTypes.func,
     query: PropTypes.string,
     pokemons: PropTypes.array,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    selectAndLink: PropTypes.func
   };
 
   componentDidMount() {
@@ -49,13 +50,14 @@ export default class PokemonList extends Component {
                   <img src={pokemon.image_url} style={{ maxWidth: "100px" }} />
                 </td>
                 <td>
-                  <a
+                  <button
+                    href="#"
                     onClick={() =>
-                      props.selectAndLink(pokemon.id, "pokemon-page")
+                      this.props.selectAndLink(pokemon.id, "pokemon-page")
                     }
                   >
                     {pokemon.name}
-                  </a>
+                  </button>
                 </td>
                 <td className="ui center aligned">{`${pokemon.kind1}/${
                   pokemon.kind2

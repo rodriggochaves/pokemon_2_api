@@ -91,4 +91,26 @@ describe("PokemonList", () => {
 
     expect(component.find(Loading).length).toEqual(1);
   });
+
+  it("can click to go to a pokemon page", () => {
+    const component = shallow(
+      <PokemonList
+        fetchAllPokemons={jest.fn()}
+        pokemons={pokemonList}
+        query=""
+        isLoading={false}
+        selectAndLink={jest.fn()}
+      />
+    );
+
+    component
+      .find("button")
+      .at(0)
+      .simulate("click");
+
+    expect(component.instance().props.selectAndLink).toHaveBeenCalledWith(
+      1,
+      "pokemon-page"
+    );
+  });
 });
