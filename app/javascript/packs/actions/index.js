@@ -9,9 +9,9 @@ export const selectAndLink = (pokemonId, page) => {
   };
 };
 
-export const showLoading = () => ({ type: "SHOW_LOADING" });
+export const showLoading = () => ({ type: types.SHOW_LOADING });
 
-export const hideLoading = () => ({ type: "HIDE_LOADING" });
+export const hideLoading = () => ({ type: types.HIDE_LOADING });
 
 export const listPokemons = pokemons => ({
   type: types.LIST_POKEMONS,
@@ -134,11 +134,13 @@ export const fetchAllPokemons = () => {
   return dispatch => {
     dispatch(showLoading());
 
-    return fetch("/api")
-      .then(response => response.json())
-      .then(response => {
-        dispatch(listPokemons(response));
-        dispatch(hideLoading());
-      });
+    setTimeout(() => {
+      return fetch("/api")
+        .then(response => response.json())
+        .then(response => {
+          dispatch(listPokemons(response));
+          dispatch(hideLoading());
+        });
+    }, 2000);
   };
 };

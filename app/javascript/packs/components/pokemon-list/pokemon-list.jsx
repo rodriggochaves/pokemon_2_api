@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import Loading from "packs/components/loading/loading";
+
 export default class PokemonList extends Component {
   constructor() {
     super();
@@ -9,7 +11,8 @@ export default class PokemonList extends Component {
   static propTypes = {
     fetchAllPokemons: PropTypes.func,
     query: PropTypes.string,
-    pokemons: PropTypes.array
+    pokemons: PropTypes.array,
+    isLoading: PropTypes.bool
   };
 
   componentDidMount() {
@@ -17,6 +20,10 @@ export default class PokemonList extends Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return <Loading />;
+    }
+
     const pokemons = this.props.pokemons.filter(pokemon => {
       if (this.props.query && this.props.query != "") {
         return pokemon.name.includes(this.props.query);

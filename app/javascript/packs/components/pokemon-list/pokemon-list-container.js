@@ -6,7 +6,8 @@ import { selectAndLink, fetchAllPokemons } from "packs/actions";
 const mapStateToProps = state => {
   return {
     pokemons: state.pokemons,
-    query: state.filterPokemons
+    query: state.filterPokemons,
+    isLoading: state.isLoading
   };
 };
 

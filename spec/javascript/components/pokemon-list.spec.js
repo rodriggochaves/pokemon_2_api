@@ -2,6 +2,7 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import PokemonList from "packs/components/pokemon-list/pokemon-list";
+import Loading from "packs/components/loading/loading";
 
 describe("PokemonList", () => {
   const pokemonList = [
@@ -76,5 +77,18 @@ describe("PokemonList", () => {
       expect(pokemonInfo.at(1).text()).toEqual("bulbasaur"));
     it("shows kind", () =>
       expect(pokemonInfo.at(2).text()).toEqual("grass/poison"));
+  });
+
+  it("shows loader when loading", () => {
+    const component = shallow(
+      <PokemonList
+        fetchAllPokemons={jest.fn()}
+        pokemons={pokemonList}
+        query=""
+        isLoading={true}
+      />
+    );
+
+    expect(component.find(Loading).length).toEqual(1);
   });
 });

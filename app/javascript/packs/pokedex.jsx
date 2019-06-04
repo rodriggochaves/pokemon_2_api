@@ -24,9 +24,7 @@ class Pokedex extends Component {
     fetchAllPokemons: PropTypes.func
   };
 
-  componentDidMount() {
-    this.props.fetchAllPokemons();
-  }
+  componentDidMount() {}
 
   render() {
     return (
