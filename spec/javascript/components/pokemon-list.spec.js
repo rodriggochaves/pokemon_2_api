@@ -8,6 +8,7 @@ describe("PokemonList", () => {
   const pokemonList = [
     {
       id: 1,
+      poke_index: "1",
       name: "bulbasaur",
       kind1: "grass",
       kind2: "poison",
@@ -15,6 +16,7 @@ describe("PokemonList", () => {
     },
     {
       id: 2,
+      poke_index: "2",
       name: "ivysaur",
       kind1: "grass",
       kind2: "poison",
@@ -22,6 +24,7 @@ describe("PokemonList", () => {
     },
     {
       id: 3,
+      poke_index: "3",
       name: "venosaur",
       kind1: "grass",
       kind2: "poison",
@@ -66,17 +69,21 @@ describe("PokemonList", () => {
         .find("td");
     });
 
+    it("id", () => {
+      expect(pokemonInfo.at(0).text()).toEqual("1");
+    });
+
     it("shows image", () =>
       expect(
         pokemonInfo
-          .at(0)
+          .at(1)
           .find("img")
           .prop("src")
       ).toEqual("https://image.com/1"));
     it("shows name", () =>
-      expect(pokemonInfo.at(1).text()).toEqual("bulbasaur"));
+      expect(pokemonInfo.at(2).text()).toEqual("bulbasaur"));
     it("shows kind", () =>
-      expect(pokemonInfo.at(2).text()).toEqual("grass/poison"));
+      expect(pokemonInfo.at(3).text()).toEqual("grass/poison"));
   });
 
   it("shows loader when loading", () => {

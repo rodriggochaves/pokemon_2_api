@@ -24,13 +24,10 @@ class PokemonsController < ApplicationController
   end
 
   def update
-    pokemon = Pokemon.find(params[:id])
-    if params[:image]
-      response = Cloudinary::Uploader.upload(params[:image], folder: 'pokemons')
-      pokemon.update(image_url: response['url'])
-    end
-    pokemon.update(pokemon_params)
-    render json: pokemon, status: 200
+    @pokemon = Pokemon.find(params[:id])
+    update_pokemon_image
+    @pokemon.update(pokemon_params)
+    render json: @pokemon, status: 200
   end
 
   def destroy
@@ -45,5 +42,12 @@ class PokemonsController < ApplicationController
     {
       kind: Poke::Kind.parse(params[:kind])
     }.merge(params.permit(:name, :poke_index, :evolve_from_id))
+  end
+
+  def update_pokemon_image
+    return unless params[:image] && params[:image] != 'undefined'
+
+    response = Cloudinary::Uploader.upload(params[:image], folder: 'pokemons')
+    @pokemon.update(image_url: response['url'])
   end
 end

@@ -27,6 +27,16 @@ describe("Form", () => {
     const component = shallow(
       <Form kinds={kinds} pokemons={pokemons} getKinds={jest.fn()} />
     );
+    component.find("input[name='poke_index']").simulate("change", {
+      target: { value: "1", name: "poke_index" }
+    });
+    expect(component.state("pokemon").poke_index).toEqual("1");
+  });
+
+  it("can change the name", () => {
+    const component = shallow(
+      <Form kinds={kinds} pokemons={pokemons} getKinds={jest.fn()} />
+    );
     component.find("input[name='name']").simulate("change", {
       target: { value: "bulbasaur", name: "name" }
     });

@@ -37,8 +37,9 @@ export default class PokemonList extends Component {
       <table className="ui celled table">
         <thead>
           <tr>
+            <th>Poke Index</th>
             <th />
-            <th className="fourteen wide">Name</th>
+            <th className="fourteen wide">Pokemon</th>
             <th className="two wide">Type</th>
           </tr>
         </thead>
@@ -46,6 +47,7 @@ export default class PokemonList extends Component {
           {pokemons.map(pokemon => {
             return (
               <tr key={`POKEMON_LIST_${pokemon.id}`}>
+                <td className="ui center aligned">{pokemon.poke_index}</td>
                 <td className="ui center aligned">
                   <img src={pokemon.image_url} style={{ maxWidth: "100px" }} />
                 </td>

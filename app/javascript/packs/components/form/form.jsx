@@ -6,6 +6,7 @@ export default class Form extends Component {
     super();
     this.state = {
       pokemon: {
+        poke_index: "",
         name: "",
         kind1: "",
         kind2: "",
@@ -37,7 +38,8 @@ export default class Form extends Component {
     const params = {
       name: pokemon.name,
       evolve_from_id: pokemon.evolve_from_id,
-      image: pokemon.file
+      image: pokemon.file,
+      poke_index: pokemon.poke_index
     };
     if (this.props.pokemon) {
       return {
@@ -95,6 +97,16 @@ export default class Form extends Component {
         onSubmit={this.submitForm}
         encType="multipart/form-data"
       >
+        <div className="field">
+          <label htmlFor="poke_index">Poke index</label>
+          <input
+            name="poke_index"
+            type="text"
+            value={pokemon.poke_index}
+            onChange={this.updateField}
+          />
+        </div>
+
         <div className="field">
           <label htmlFor="name">Name</label>
           <input
