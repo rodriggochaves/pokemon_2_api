@@ -25,6 +25,10 @@ class PokemonsController < ApplicationController
 
   def update
     pokemon = Pokemon.find(params[:id])
+    if params[:image]
+      response = Cloudinary::Uploader.upload(params[:image], folder: 'pokemons')
+      pokemon.update(image_url: response['url'])
+    end
     pokemon.update(pokemon_params)
     render json: pokemon, status: 200
   end

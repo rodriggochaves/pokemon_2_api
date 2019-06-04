@@ -56,10 +56,15 @@ export const updatePokemon = pokemon => ({
 export const requestUpdatePokemon = pokemon => dispatch => {
   dispatch(showLoading());
 
+  const formData = new FormData();
+
+  Object.keys(pokemon).map(key => {
+    formData.append(key, pokemon[key]);
+  });
+
   return fetch(`/api/pokemons/${pokemon.id}`, {
-    body: JSON.stringify(pokemon),
-    method: "PATCH",
-    headers: { "content-type": "application/json" }
+    body: formData,
+    method: "PATCH"
   })
     .then(response => response.json())
     .then(refresh => {
@@ -102,7 +107,6 @@ export const postPokemon = pokemon => dispatch => {
   return fetch("/api/pokemons", {
     body: formData,
     method: "POST"
-    // headers: { "content-type": "multipart/form-data" }
   })
     .then(response => response.json())
     .then(response => {

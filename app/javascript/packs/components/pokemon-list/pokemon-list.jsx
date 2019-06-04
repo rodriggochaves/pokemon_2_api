@@ -25,7 +25,7 @@ export default props => {
           return (
             <tr key={`POKEMON_LIST_${pokemon.id}`}>
               <td className="ui center aligned">
-                <img src={pokemon.image_url} />
+                <img src={pokemon.image_url} style={{maxWidth: "100px"}}/>
               </td>
               <td>
                 <a

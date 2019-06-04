@@ -9,6 +9,11 @@ RSpec.describe Poke::Kind do
     Poke::Kind.initialize
   end
 
+  it '#parse knows how to handle nil' do
+    kinds = Poke::Kind.parse(nil)
+    expect(kinds).to eq([])
+  end
+
   it '#parse with one valid type' do
     kinds = Poke::Kind.parse('fire')
     expect(kinds).to include(Kind['fire'])

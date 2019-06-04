@@ -79,7 +79,8 @@ RSpec.describe 'PokemonsController', type: :request do
       Pokemon.create!(
         name: 'Mega Charizard',
         kind: [Kind['fire']],
-        poke_index: 6
+        poke_index: 6,
+        image_url: "https://image.com/charizard"
       )
     end
 
@@ -98,6 +99,14 @@ RSpec.describe 'PokemonsController', type: :request do
       subject
       charizard.reload
       expect(charizard.kind).to match_array([Kind['fire'], Kind['flying']])
+    end
+
+    it 'can change the pokemon image' do
+      new_image_url = "https://image.com/hd/charizard"
+      allow(Cloudinary::Uploader).to receive(:upload).and_return('url' => new_image_url)
+      patch "/api/pokemons/#{charizard.id}", params: { image: new_image_url }
+      charizard.reload
+      expect(charizard.image_url).to eq(new_image_url)
     end
   end
 
