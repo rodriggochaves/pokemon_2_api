@@ -8,7 +8,6 @@ import PropTypes from "prop-types";
 import PokemonListContainer from "./components/pokemon-list/pokemon-list-container";
 import PokemonFilterContainer from "./components/pokemon-filter/pokemon-filter-container";
 import Loading from "./components/loading/loading";
-import CreatePageContainer from "./components/create-page/create-page-container";
 
 class Pokedex extends Component {
   constructor() {
@@ -19,8 +18,15 @@ class Pokedex extends Component {
     };
   }
 
+  propTypes = {
+    // redux
+    isLoading: PropTypes.bool,
+    link: PropTypes.func,
+    fetchAllPokemons: PropTypes.func
+  };
+
   componentDidMount() {
-    this.props.fetchPokemons();
+    this.props.fetchAllPokemons();
   }
 
   render() {

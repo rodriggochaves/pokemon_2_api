@@ -1,18 +1,17 @@
 import { connect } from "react-redux";
 
 import Pokedex from "packs/pokedex";
-import { fetchPokemons, link } from "./actions";
+import { fetchAllPokemons, link } from "./actions";
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.isLoading,
-    pokemonsList: state.pokemons
+    isLoading: state.isLoading
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchPokemons: () => dispatch(fetchPokemons()),
+    fetchAllPokemons: () => dispatch(fetchAllPokemons()),
     link: page => dispatch(link(page))
   };
 };

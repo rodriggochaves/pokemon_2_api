@@ -130,8 +130,7 @@ export const fetchPokemon = pokemonId => {
   };
 };
 
-// TODO: rename to fetchAllPokemons
-export const fetchPokemons = () => {
+export const fetchAllPokemons = () => {
   return dispatch => {
     dispatch(showLoading());
 
