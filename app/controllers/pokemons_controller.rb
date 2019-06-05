@@ -16,11 +16,13 @@ class PokemonsController < ApplicationController
   end
 
   def create
-    image = params[:image]
-    response = Cloudinary::Uploader.upload(image, folder: 'pokemons')
-    pokemon = Pokemon.new(pokemon_params.merge(image_url: response['url']))
-    pokemon.save!
-    render json: pokemon, status: 200
+    @pokemon = Pokemon.new(pokemon_params)
+    if @pokemon.save
+      update_pokemon_image
+      render json: @pokemon, status: 200
+    else
+      render json: @pokemon.errors, status: 422
+    end
   end
 
   def update
