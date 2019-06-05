@@ -80,13 +80,22 @@ RSpec.describe 'PokemonsController', type: :request do
   end
 
   it 'POST /api/pokemons with invalid parameter' do
-    charizard = Pokemon.create(name: 'Charizard')
     post '/api/pokemons', params: {
       kind: 'fire/flying',
-      poke_index: 6,
-      evolve_from_id: charizard.id
+      poke_index: 6
     }
     expect(response).to have_http_status(422)
+  end
+
+  it 'POST /api/pokemons when cloudinary get an error' do
+    allow(Cloudinary::Uploader).to receive(:upload).and_raise(StandardError)
+    post '/api/pokemons', params: {
+      name: 'Mega Charizard',
+      kind: 'fire/flying',
+      poke_index: 6,
+      image: 'some image'
+    }
+    expect(response).to have_http_status(500)
   end
 
   describe 'PATCH /api/pokemons/:id can update a pokemon' do
@@ -120,8 +129,7 @@ RSpec.describe 'PokemonsController', type: :request do
       new_image_url = 'https://image.com/hd/charizard'
       allow(Cloudinary::Uploader).to receive(:upload).and_return('url' => new_image_url)
       patch "/api/pokemons/#{charizard.id}", params: { image: new_image_url }
-      charizard.reload
-      expect(charizard.image_url).to eq(new_image_url)
+      expect(charizard.reload.image_url).to eq(new_image_url)
     end
   end
 

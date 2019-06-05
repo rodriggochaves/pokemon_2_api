@@ -23,6 +23,8 @@ class PokemonsController < ApplicationController
     else
       render json: @pokemon.errors, status: 422
     end
+  rescue StandardError
+    render json: 'Cloudinary is off', status: 500
   end
 
   def update
