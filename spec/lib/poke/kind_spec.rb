@@ -16,7 +16,7 @@ RSpec.describe Poke::Kind do
 
   it '#parse with one valid type' do
     kinds = Poke::Kind.parse('fire')
-    expect(kinds).to include(Kind['fire'])
+    expect(kinds).to eq([Kind['fire']])
   end
 
   it '#parse with two valid types' do

@@ -18,11 +18,11 @@ class Pokemon < ApplicationRecord
   end
 
   def kind1
-    kind.map(&:description).min_by { |m| m }
+    kind.map(&:description).min
   end
 
   def kind2
-    kind.map(&:description).max_by { |m| m }
+    kind.map(&:description).sort[1]
   end
 
   def evolutions

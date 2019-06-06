@@ -32,4 +32,19 @@ RSpec.describe Pokemon, type: :model do
 
     expect(bulbasaur.parsed_kind).to eq('grass/poison')
   end
+
+  it '#kind1 return the first pokemon kind' do
+    pokemon = Pokemon.spawn(name: 'bulbasaur', kind: %w[grass poison])
+    expect(pokemon.kind1).to eq(Kind['grass'].description)
+  end
+
+  it '#kind2 return the second pokemon kind' do
+    pokemon = Pokemon.spawn(name: 'bulbasaur', kind: %w[grass poison])
+    expect(pokemon.kind2).to eq(Kind['poison'].description)
+  end
+
+  it '#kind2 returns nil if pokemon have one kind' do
+    pokemon = Pokemon.spawn(name: 'chamander', kind: %w[fire])
+    expect(pokemon.kind2).to eq(nil)
+  end
 end
