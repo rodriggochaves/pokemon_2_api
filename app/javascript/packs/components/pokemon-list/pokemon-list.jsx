@@ -20,6 +20,14 @@ export default class PokemonList extends Component {
     this.props.fetchAllPokemons();
   }
 
+  renderType = pokemon => {
+    if (pokemon.kind2) {
+      return <td>{`${pokemon.kind1}/${pokemon.kind2}`}</td>;
+    } else {
+      return <td>{pokemon.kind1}</td>;
+    }
+  };
+
   render() {
     if (this.props.isLoading) {
       return <Loading />;
@@ -61,9 +69,7 @@ export default class PokemonList extends Component {
                     {pokemon.name}
                   </button>
                 </td>
-                <td className="ui center aligned">{`${pokemon.kind1}/${
-                  pokemon.kind2
-                }`}</td>
+                {this.renderType(pokemon)}
               </tr>
             );
           })}

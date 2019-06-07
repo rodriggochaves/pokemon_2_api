@@ -19,6 +19,14 @@ export default class PokemonPage extends Component {
       .then(() => this.props.link("pokedex"));
   };
 
+  renderKind = pokemon => {
+    if (pokemon.kind2) {
+      return `${pokemon.kind1}/${pokemon.kind2}`;
+    } else {
+      return pokemon.kind1;
+    }
+  };
+
   render() {
     const { pokemon } = this.props;
 
@@ -30,9 +38,7 @@ export default class PokemonPage extends Component {
       <div className="ui container">
         <br />
         <h1>{pokemon.name}</h1>
-        <p>
-          {pokemon.kind1}/{pokemon.kind2}
-        </p>
+        <p>{this.renderKind(pokemon)}</p>
         <h2>Evolutions</h2>
         {pokemon.evolutions.map(evo => {
           return (
