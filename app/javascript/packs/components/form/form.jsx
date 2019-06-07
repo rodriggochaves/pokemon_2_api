@@ -13,7 +13,8 @@ export default class Form extends Component {
         evolve_from_id: "",
         file: ""
       },
-      redirect: null
+      redirect: null,
+      error: ""
     };
   }
 
@@ -59,9 +60,14 @@ export default class Form extends Component {
   submitForm = event => {
     event.preventDefault();
     const params = this.buildParams();
-    this.props.submit(params).then(() => {
-      this.props.link("pokedex");
-    });
+    this.props
+      .submit(params)
+      .then(() => {
+        this.props.link("pokedex");
+      })
+      .catch(error => {
+        this.setState({ error: error });
+      });
   };
 
   updateField = event => {
@@ -88,6 +94,12 @@ export default class Form extends Component {
     reader.readAsDataURL(file);
   };
 
+  renderError = () => {
+    if (this.state.error !== "") {
+      return this.state.error;
+    }
+  };
+
   render() {
     const pokemon = this.state.pokemon;
 
@@ -97,6 +109,7 @@ export default class Form extends Component {
         onSubmit={this.submitForm}
         encType="multipart/form-data"
       >
+        <p style={{ color: "red" }}>{this.renderError()}</p>
         <div className="field">
           <label htmlFor="poke_index">Poke index</label>
           <input

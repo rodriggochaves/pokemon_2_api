@@ -8,6 +8,10 @@ import types from "packs/actions/types";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+beforeEach(() => {
+  fetchMock.reset();
+});
+
 describe("Actions", () => {
   it("can create a pokemon", () => {
     const pokemon = {
@@ -21,9 +25,9 @@ describe("Actions", () => {
     });
 
     const expectedActions = [
-      { type: "SHOW_LOADING" },
-      { type: "CREATE_POKEMON", pokemon },
-      { type: "HIDE_LOADING" }
+      { type: types.SHOW_LOADING },
+      { type: types.CREATE_POKEMON, pokemon },
+      { type: types.HIDE_LOADING }
     ];
 
     const store = mockStore({ pokemon: undefined });

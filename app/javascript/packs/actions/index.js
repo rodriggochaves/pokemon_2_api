@@ -108,7 +108,13 @@ export const postPokemon = pokemon => dispatch => {
     body: formData,
     method: "POST"
   })
-    .then(response => response.json())
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      } else {
+        throw "Pokemon invalid";
+      }
+    })
     .then(response => {
       dispatch(createPokemon(response));
       dispatch(hideLoading());
