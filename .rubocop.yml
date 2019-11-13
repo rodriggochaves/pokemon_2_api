@@ -4,6 +4,7 @@ AllCops:
     - "node_modules/**/*"
     - "vendor/**/*"
     - ".git/**/*"
+    - "db/**/*"
 
 Style/Documentation:
   Enabled: false
